@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { HeaderComponent } from './header/header.component';
-import { FooterComponent } from './footer/footer.component';
-import { LogoComponent } from './header/logo/logo.component';
-import { UserMenuComponent } from './header/user-menu/user-menu.component';
+import { HeaderComponent } from './components/header/header.component';
+import { FooterComponent } from './components/footer/footer.component';
+import { LogoComponent } from './components/logo/logo.component';
+import { UserMenuComponent } from './components/user-menu/user-menu.component';
 
 
 

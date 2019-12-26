@@ -1,17 +1,17 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { CoursesPageComponent } from './courses-page/courses-page.component';
+import { WrapperPage } from '../shared/components/wrapper-page/wrapper.page';
 import {SharedModule} from "../shared/shared.module";
-import { CoursesComponent } from './courses-page/courses/courses.component';
-import { CourseComponent } from './courses-page/courses/course/course.component';
+import { CoursesComponent } from './components/courses/courses.component';
+import { CourseComponent } from './components/course/course.component';
 
 
 
 @NgModule({
-  declarations: [CoursesPageComponent, CoursesComponent, CourseComponent],
+  declarations: [WrapperPage, CoursesComponent, CourseComponent],
   exports: [
     CourseComponent,
-    CoursesPageComponent
+    WrapperPage
   ],
   imports: [
     CommonModule,

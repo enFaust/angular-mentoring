@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import {Course} from "../entity/course";
-import {CommonCourse} from "../entity/impl/common-course";
+import {Course} from "../model/entity/course";
+import {CommonCourse} from "../model/entity/impl/common-course";
 
 @Injectable({
   providedIn: 'root'
