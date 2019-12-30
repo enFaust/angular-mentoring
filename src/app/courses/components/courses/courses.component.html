@@ -1,5 +1,12 @@
 <div class="courses-page">
-  <h2>Courses</h2>
-  <app-course *ngFor="let course of courses" [course]="course" ></app-course>
+  <app-courses-search></app-courses-search>
+  <div class="">
+    <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#addCourseModal">
+      <img src="assets/img/course/add.svg" width="30" height="30" class="d-inline-block align-top mx-1 " alt="">
+      Add course
+    </button>
+  </div>
+  <app-course (onDelete)="onDelete($event)" *ngFor="let course of courses" [course]="course"></app-course>
+  <app-load-more></app-load-more>
 </div>
 
