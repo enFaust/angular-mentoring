@@ -8,7 +8,7 @@ import {CommonCourse} from "../../model/course/impl/common-course";
   templateUrl: './courses.component.html',
   styleUrls: ['./courses.component.css']
 })
-export class CoursesComponent implements OnInit , OnChanges{
+export class CoursesComponent implements OnInit{
 
   public courses: Course[];
   private newCourse: Course = {
@@ -25,10 +25,6 @@ export class CoursesComponent implements OnInit , OnChanges{
 
   ngOnInit() {
     this.courses = this.coursesService.getCourses();
-  }
-
-  ngOnChanges(): void {
-    console.log('ngOnChanges');
   }
 
   public onDelete(id: number): void {
