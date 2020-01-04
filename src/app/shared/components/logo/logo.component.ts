@@ -1,15 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, CUSTOM_ELEMENTS_SCHEMA, NgModule, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-logo',
   templateUrl: './logo.component.html',
   styleUrls: ['./logo.component.css']
 })
-export class LogoComponent implements OnInit {
+export class LogoComponent {
 
-  constructor() { }
-
-  ngOnInit() {
+  constructor() {
   }
+
 
 }

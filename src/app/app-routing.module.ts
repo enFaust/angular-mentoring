@@ -1,6 +1,5 @@
-import {NgModule} from '@angular/core';
+import {CUSTOM_ELEMENTS_SCHEMA, NgModule} from '@angular/core';
 import {Routes, RouterModule} from '@angular/router';
-import {WrapperPage} from './shared/components/wrapper-page/wrapper.page';
 import {NotFoundComponent} from './shared/components/not-found/not-found.component';
 import {CoursesComponent} from './courses/components/courses/courses.component';
 
@@ -12,9 +11,10 @@ const routes: Routes = [
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
+  schemas: [
+    CUSTOM_ELEMENTS_SCHEMA
+  ]
 })
 export class AppRoutingModule {
-
-
 }

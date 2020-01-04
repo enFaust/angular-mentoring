@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import {UserService} from "../../service/user/user.service";
-import {User} from "../../model/course/user";
+import {Component, CUSTOM_ELEMENTS_SCHEMA, NgModule, OnInit} from '@angular/core';
+import {UserService} from '../../service/user/user.service';
+import {User} from '../../model/course/user';
 
 @Component({
   selector: 'app-header',
