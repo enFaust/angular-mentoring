@@ -1,15 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-courses-page',
+  selector: 'wrapper-page',
   templateUrl: './wrapper.page.html',
   styleUrls: ['./wrapper.page.css']
 })
-export class WrapperPage implements OnInit {
+// tslint:disable-next-line:component-class-suffix
+export class WrapperPage {
 
   constructor() { }
-
-  ngOnInit() {
-  }
 
 }
