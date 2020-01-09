@@ -29,10 +29,4 @@ describe('CoursesComponent', () => {
   it('get courses not null', () => {
     expect(component.courses).not.toBeNull();
   });
-
-
-  /*it('delete course by id', () => {
-    const spy = spyOn(component, 'onDelete');
-    expect(spy).toHaveBeenCalled();
-    });*/
 });
