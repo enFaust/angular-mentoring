@@ -10,14 +10,6 @@ import {Course} from '../../model/course/course';
 export class CoursesComponent implements OnInit {
 
   public courses: Course[];
-  private newCourse: Course = {
-    id: 0,
-    title: '',
-    creationDate: '',
-    duration: '',
-    description: '',
-  };
-
 
   constructor(private coursesService: CourseService) {
   }
@@ -28,6 +20,6 @@ export class CoursesComponent implements OnInit {
 
   public onDelete(id: number): void {
     console.log('Drop course with id: ' + id);
-    this.courses = this.courses.filter((item: Course) => item.id !== id);
+   // this.courses = this.courses.filter((item: Course) => item.id !== id);
   }
 }

@@ -8,8 +8,8 @@ import {BreadcrumbsComponent} from './components/breadcrumbs/breadcrumbs.compone
 import {LoadMoreComponent} from './components/load-more/load-more.component';
 import {CopyrightComponent} from './components/copyright/copyright.component';
 import {NotFoundComponent} from './components/not-found/not-found.component';
-import {WrapperPageComponent} from './components/wrapper-page/wrapper-page.component';
-import {CoursesModule} from "../courses/courses.module";
+import {WrapperPage} from './components/wrapper-page/wrapper.page';
+import {RouterModule} from "@angular/router";
 
 
 @NgModule({
@@ -19,20 +19,19 @@ import {CoursesModule} from "../courses/courses.module";
     LogoComponent,
     UserMenuComponent,
     BreadcrumbsComponent,
-    LoadMoreComponent,
     CopyrightComponent,
     NotFoundComponent,
-    WrapperPageComponent
+    WrapperPage
   ],
   exports: [
     FooterComponent,
     HeaderComponent,
     BreadcrumbsComponent,
-    LoadMoreComponent
+    WrapperPage
   ],
   imports: [
     CommonModule,
-    CoursesModule
+    RouterModule
   ],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA,

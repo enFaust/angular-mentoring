@@ -6,7 +6,7 @@ import {Course} from '../../model/course/course';
   templateUrl: './course.component.html',
   styleUrls: ['./course.component.css']
 })
-export class CourseComponent implements OnInit {
+export class CourseComponent {
 
   @Input()
   public course: Course;
@@ -15,9 +15,6 @@ export class CourseComponent implements OnInit {
   private onDelete: EventEmitter<number> = new EventEmitter<number>();
 
   constructor() { }
-
-  ngOnInit() {
-  }
 
   public delete() {
     this.onDelete.emit(this.course.id);
