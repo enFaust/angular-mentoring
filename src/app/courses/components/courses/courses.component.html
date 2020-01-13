@@ -1,12 +1,17 @@
 <div class="courses-page">
-  <app-courses-search></app-courses-search>
+  <app-courses-search (finder)="orderByTitle($event)"></app-courses-search>
   <div class="">
     <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#addCourseModal">
       <img src="assets/img/course/add.svg" width="30" height="30" class="d-inline-block align-top mx-1 " alt="">
       Add course
     </button>
   </div>
-  <app-course (delete)="onDelete($event)" *ngFor="let course of courses" [course]="course"></app-course>
+  <app-course (delete)="onDelete($event)" *ngFor="let course of courses | orderBy : 'date'" [course]="course"></app-course>
+  <div class="card my-3" *ngIf="courses.length == 0">
+      <div class="card-body text-center">
+        <h4>No data. Feel free to add new course.</h4>
+      </div>
+  </div>
   <app-load-more></app-load-more>
 </div>
 

@@ -19,6 +19,6 @@ export class CourseComponent {
 
   public onDelete() {
     this.delete.emit(this.course.id);
-}
+  }
 
 }

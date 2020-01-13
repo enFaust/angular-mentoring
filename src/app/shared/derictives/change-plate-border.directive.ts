@@ -8,30 +8,34 @@ export class ChangePlateBorderDirective implements OnInit {
   @Input('appChangePlateBorder')
   public creationDate: Date;
 
-  private twoWeeksAgo: Date;
-
   constructor(private element: ElementRef) {
   }
 
   ngOnInit(): void {
-
     const elementStyle = this.element.nativeElement.style;
-    elementStyle.borderWidth = '2px';
 
     if (this.isFreshCourse()) {
+      elementStyle.borderWidth = '2px';
       elementStyle.borderColor = '#28a745';
-    } else {
-      elementStyle.borderColor = 'green';
     }
-
+    if (this.isUpcomingCourse()) {
+      elementStyle.borderWidth = '2px';
+      elementStyle.borderColor = 'blue';
+    }
   }
 
   private isFreshCourse() {
 
     const currentDate = new Date();
     const dateOffset = (24 * 60 * 60 * 1000) * 14;
-    this.twoWeeksAgo.setTime(currentDate.getTime() - dateOffset);
+    const twoWeeksAgo = new Date();
+    twoWeeksAgo.setTime(currentDate.getTime() - dateOffset);
 
-    return (this.creationDate < new Date()) && (this.creationDate >= this.twoWeeksAgo);
+    return (this.creationDate < currentDate) && (this.creationDate >= twoWeeksAgo);
   }
+
+  private isUpcomingCourse() {
+    return (this.creationDate > new Date()) ;
+  }
+
 }

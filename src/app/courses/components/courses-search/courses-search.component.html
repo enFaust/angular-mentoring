@@ -6,11 +6,11 @@
           <i class="fas fa-search h4 text-body"></i>
         </div>
         <div class="col">
-          <input class="form-control form-control-lg form-control-borderless" type="search"
+          <input #searchText class="form-control form-control-lg form-control-borderless value" type="search"
                  placeholder="Search courses by keywords">
         </div>
         <div class="col-auto">
-          <button class="btn btn-lg btn-success" type="submit">Search</button>
+          <a class="btn btn-lg btn-success" (click)="searchByTitle()">Search</a>
         </div>
       </div>
     </form>
