@@ -10,6 +10,7 @@ import {CopyrightComponent} from './components/copyright/copyright.component';
 import {NotFoundComponent} from './components/not-found/not-found.component';
 import {WrapperPage} from './components/wrapper-page/wrapper.page';
 import {RouterModule} from "@angular/router";
+import { ChangePlateBorderDirective } from './derictives/change-plate-border.directive';
 
 
 @NgModule({
@@ -21,13 +22,15 @@ import {RouterModule} from "@angular/router";
     BreadcrumbsComponent,
     CopyrightComponent,
     NotFoundComponent,
-    WrapperPage
+    WrapperPage,
+    ChangePlateBorderDirective
   ],
   exports: [
     FooterComponent,
     HeaderComponent,
     BreadcrumbsComponent,
-    WrapperPage
+    WrapperPage,
+    ChangePlateBorderDirective
   ],
   imports: [
     CommonModule,

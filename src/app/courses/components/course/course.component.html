@@ -1,4 +1,4 @@
-<div class="card text-center my-3 id" id="{{course?.id}}">
+<div class="card text-center my-3 id"  [appChangePlateBorder]="course.creationDate" id="{{course?.id}}">
   <div class="card-body">
     <div class="row">
       <div class="col-7"><h5 id="title" class="card-title">{{course?.title}}</h5></div>
@@ -6,7 +6,7 @@
         <span class="badge badge-pill badge-secondary duration">{{course?.duration}}</span>
       </div>
       <div class="col-1">
-        <span class="badge badge-pill badge-secondary creation-date">{{course?.creationDate}}</span>
+        <span class="badge badge-pill badge-secondary creation-date">{{course?.creationDate | date : 'dd MMM yyyy' }}</span>
       </div>
     </div>
     <div class="row">
