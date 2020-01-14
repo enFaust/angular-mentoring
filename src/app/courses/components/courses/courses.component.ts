@@ -26,6 +26,18 @@ export class CoursesComponent implements OnInit {
   }
 
   public orderByTitle(searchWord: string): void {
-    this.courses = this.allCourses.filter((item: Course) => item.title.toString().toUpperCase().includes(searchWord));
+    this.courses = this.allCourses.filter((item: Course) => item.title.toString().toUpperCase().includes(searchWord))
+      .sort( (v1, v2) => this.orderByNameComparator(v1,v2));
   }
+
+  private orderByNameComparator(v1: Course, v2: Course) {
+    if (v1.title === v2.title) {
+      return 0;
+    }
+    if (v1.title > v2.title) {
+      return 1;
+    }
+    return -1;
+  }
+
 }
