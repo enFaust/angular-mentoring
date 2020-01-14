@@ -6,14 +6,8 @@ import {Course} from "../../../courses/model/course/course";
 })
 export class OrderByPipe implements PipeTransform {
 
-  transform(courses: Course[], orderBy: string): any {
-
-
-
-        return courses.sort((v1, v2) => this.orderByDateComparator(v1, v2));
-
-
-
+  transform(courses: Course[]): any {
+    return courses.sort((v1, v2) => this.orderByDateComparator(v1, v2));
   }
 
   private orderByDateComparator(v1: Course, v2: Course) {

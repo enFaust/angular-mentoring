@@ -10,12 +10,12 @@ export class DurationConverterPipe implements PipeTransform {
     const minutes = Math.trunc(duration % 60);
 
     if (hours == 0) {
-      return minutes + ' min';
+      return minutes + 'min';
     }
     if (minutes == 0) {
-      return hours + ' h';
+      return hours + 'h';
     }
-    return hours + ' h ' + minutes + ' min';
+    return hours + 'h ' + minutes + 'min';
   }
 
 }
