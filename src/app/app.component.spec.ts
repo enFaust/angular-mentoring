@@ -1,6 +1,13 @@
-import { TestBed, async } from '@angular/core/testing';
-import { RouterTestingModule } from '@angular/router/testing';
-import { AppComponent } from './app.component';
+import {TestBed, async} from '@angular/core/testing';
+import {RouterTestingModule} from '@angular/router/testing';
+import {AppComponent} from './app.component';
+import {WrapperPage} from "./shared/components/wrapper-page/wrapper.page";
+import {HeaderComponent} from "./shared/components/header/header.component";
+import {BreadcrumbsComponent} from "./shared/components/breadcrumbs/breadcrumbs.component";
+import {FooterComponent} from "./shared/components/footer/footer.component";
+import {LogoComponent} from "./shared/components/logo/logo.component";
+import {UserMenuComponent} from "./shared/components/user-menu/user-menu.component";
+import {CopyrightComponent} from "./shared/components/copyright/copyright.component";
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
@@ -9,7 +16,14 @@ describe('AppComponent', () => {
         RouterTestingModule
       ],
       declarations: [
-        AppComponent
+        AppComponent,
+        WrapperPage,
+        HeaderComponent,
+        BreadcrumbsComponent,
+        FooterComponent,
+        LogoComponent,
+        UserMenuComponent,
+        CopyrightComponent
       ],
     }).compileComponents();
   }));
@@ -20,16 +34,9 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have as title 'task01'`, () => {
+  it(`should have as title 'Video Course'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.debugElement.componentInstance;
-    expect(app.title).toEqual('task01');
-  });
-
-  it('should render title', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
-    const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('.content span').textContent).toContain('task01 app is running!');
+    expect(app.title).toEqual('Video Course');
   });
 });

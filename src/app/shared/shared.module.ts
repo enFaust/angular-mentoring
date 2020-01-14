@@ -1,4 +1,4 @@
-import {NgModule} from '@angular/core';
+import {CUSTOM_ELEMENTS_SCHEMA, NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {HeaderComponent} from './components/header/header.component';
 import {FooterComponent} from './components/footer/footer.component';
@@ -7,19 +7,34 @@ import {UserMenuComponent} from './components/user-menu/user-menu.component';
 import {BreadcrumbsComponent} from './components/breadcrumbs/breadcrumbs.component';
 import {LoadMoreComponent} from './components/load-more/load-more.component';
 import {CopyrightComponent} from './components/copyright/copyright.component';
-import { NotFoundComponent } from './components/not-found/not-found.component';
+import {NotFoundComponent} from './components/not-found/not-found.component';
+import {WrapperPage} from './components/wrapper-page/wrapper.page';
+import {RouterModule} from "@angular/router";
 
 
 @NgModule({
-  declarations: [HeaderComponent, FooterComponent, LogoComponent, UserMenuComponent, BreadcrumbsComponent, LoadMoreComponent, CopyrightComponent, NotFoundComponent],
+  declarations: [
+    HeaderComponent,
+    FooterComponent,
+    LogoComponent,
+    UserMenuComponent,
+    BreadcrumbsComponent,
+    CopyrightComponent,
+    NotFoundComponent,
+    WrapperPage
+  ],
   exports: [
     FooterComponent,
     HeaderComponent,
     BreadcrumbsComponent,
-    LoadMoreComponent
+    WrapperPage
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    RouterModule
+  ],
+  schemas: [
+    CUSTOM_ELEMENTS_SCHEMA,
   ]
 })
 export class SharedModule {

@@ -1,26 +1,24 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {Course} from "../../model/course/course";
+import {Course} from '../../model/course/course';
 
 @Component({
   selector: 'app-course',
   templateUrl: './course.component.html',
   styleUrls: ['./course.component.css']
 })
-export class CourseComponent implements OnInit {
+export class CourseComponent {
 
   @Input()
   public course: Course;
 
+  // tslint:disable-next-line:no-output-on-prefix
   @Output()
-  private onDelete: EventEmitter<number> = new EventEmitter<number>();
+  public delete: EventEmitter<number> = new EventEmitter<number>();
 
   constructor() { }
 
-  ngOnInit() {
-  }
-
-  public delete() {
-    this.onDelete.emit(this.course.id);
+  public onDelete() {
+    this.delete.emit(this.course.id);
 }
 
 }

@@ -1,20 +1,20 @@
-<div class="card text-center my-3" id="{{course?.id}}">
+<div class="card text-center my-3 id" id="{{course?.id}}">
   <div class="card-body">
     <div class="row">
-      <div class="col-7"><h5 class="card-title">{{course.title}}</h5></div>
+      <div class="col-7"><h5 id="title" class="card-title">{{course?.title}}</h5></div>
       <div class="col-1">
-        <span class="badge badge-pill badge-secondary">{{course.duration}}</span>
+        <span class="badge badge-pill badge-secondary duration">{{course?.duration}}</span>
       </div>
       <div class="col-1">
-        <span class="badge badge-pill badge-secondary">{{course.creationDate}}</span>
+        <span class="badge badge-pill badge-secondary creation-date">{{course?.creationDate}}</span>
       </div>
     </div>
     <div class="row">
-      <div class="col-9"><p class="card-text">{{course.description}}</p></div>
+      <div class="col-9"><p class="card-text description">{{course?.description}}</p></div>
       <div class="col-3 text-center"><a href="#" class="btn btn-info btn-sm">
         <img src="assets/img/course/pencil.svg" width="30" height="30" class="d-inline-block align-top mx-1" alt="">
         Edit</a>
-        <a href="#" class="btn btn-info btn-sm" (click)="delete()" >
+        <a href="#" id="delete-course" class="btn btn-info btn-sm delete" (click)="onDelete()" >
           <img src="assets/img/course/trash.svg" width="30" height="30" class="d-inline-block align-top mx-1" alt="">
           Delete</a>
       </div>

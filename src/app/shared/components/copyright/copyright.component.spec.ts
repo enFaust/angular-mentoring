@@ -1,21 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { FooterComponent } from './footer.component';
-import {CopyrightComponent} from "../copyright/copyright.component";
+import { CopyrightComponent } from './copyright.component';
 
-describe('FooterComponent', () => {
-  let component: FooterComponent;
-  let fixture: ComponentFixture<FooterComponent>;
+describe('CopyrightComponent', () => {
+  let component: CopyrightComponent;
+  let fixture: ComponentFixture<CopyrightComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ FooterComponent, CopyrightComponent]
+      declarations: [ CopyrightComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(FooterComponent);
+    fixture = TestBed.createComponent(CopyrightComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
