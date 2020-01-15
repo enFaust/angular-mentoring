@@ -21,7 +21,7 @@ describe('CourseComponent', () => {
     fixture = TestBed.createComponent(CourseComponent);
     component = fixture.componentInstance;
 
-    component.course = new CommonCourse(1, 'Video Course 1. Name tag', new Date(), 120,
+    component.course = new CommonCourse(1, 'Video Course 1. Name tag', new Date(2020, 0, 15), 120,
       'Learn about where you can find course descriptions, what information they include, how they work, ' +
       'and details about various components of a course description. Course descriptions report information about a ' +
       'university or college\'s classes. They\'re published both in course catalogs that outline degree requirements and' +
@@ -55,7 +55,7 @@ describe('CourseComponent', () => {
 
   it('course creation date expect', () => {
     const cartTitle = fixture.debugElement.query(By.css('.creation-date')).nativeElement;
-    expect(cartTitle.textContent).toContain('14 Jan 2020');
+    expect(cartTitle.textContent).toContain('15 Jan 2020');
   });
 
   it('course duration expect', () => {
