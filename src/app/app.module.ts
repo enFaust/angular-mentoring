@@ -4,8 +4,7 @@ import {CUSTOM_ELEMENTS_SCHEMA, NgModule} from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import {CoursesModule} from './courses/courses.module';
-import {SharedModule} from "./shared/shared.module";
-import {WrapperPage} from "./shared/components/wrapper-page/wrapper.page";
+import {SharedModule} from './shared/shared.module';
 
 @NgModule({
   declarations: [

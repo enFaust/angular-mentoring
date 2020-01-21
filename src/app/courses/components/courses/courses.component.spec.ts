@@ -1,9 +1,13 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { CoursesComponent } from './courses.component';
-import {CoursesSearchComponent} from "../courses-search/courses-search.component";
-import {CourseComponent} from "../course/course.component";
-import {LoadMoreComponent} from "../../../shared/components/load-more/load-more.component";
+import {CoursesComponent} from './courses.component';
+import {CoursesSearchComponent} from '../courses-search/courses-search.component';
+import {CourseComponent} from '../course/course.component';
+import {LoadMoreComponent} from '../../../shared/components/load-more/load-more.component';
+import {OrderByPipe} from "../../../shared/pipes/order-by/order-by.pipe";
+import {DurationConverterPipe} from "../../../shared/pipes/duration/duration-converter.pipe";
+import {ChangePlateBorderDirective} from "../../../shared/derictives/change-plate-border.directive";
+import {CourseService} from "../../service/course/course.service";
 
 describe('CoursesComponent', () => {
   let component: CoursesComponent;
@@ -11,9 +15,17 @@ describe('CoursesComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CoursesComponent, CoursesSearchComponent, CourseComponent, LoadMoreComponent]
+      declarations: [
+        CoursesComponent,
+        CoursesSearchComponent,
+        CourseComponent,
+        LoadMoreComponent,
+        OrderByPipe,
+        DurationConverterPipe,
+        ChangePlateBorderDirective
+      ]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
@@ -29,4 +41,5 @@ describe('CoursesComponent', () => {
   it('get courses not null', () => {
     expect(component.courses).not.toBeNull();
   });
+
 });
