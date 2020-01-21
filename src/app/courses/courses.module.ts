@@ -1,20 +1,23 @@
-import {CUSTOM_ELEMENTS_SCHEMA, NgModule} from '@angular/core';
+import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {WrapperPage} from '../shared/components/wrapper-page/wrapper.page';
 import {SharedModule} from '../shared/shared.module';
 import {CoursesComponent} from './components/courses/courses.component';
 import {CourseComponent} from './components/course/course.component';
 import {CoursesSearchComponent} from './components/courses-search/courses-search.component';
 import {AppRoutingModule} from '../app-routing.module';
 import {LoadMoreComponent} from "../shared/components/load-more/load-more.component";
+import {DurationConverterPipe} from "../shared/pipes/duration/duration-converter.pipe";
+import {OrderByPipe} from "../shared/pipes/order-by/order-by.pipe";
+import {FormsModule} from "@angular/forms";
 
 
 @NgModule({
-  declarations: [CoursesComponent, CourseComponent, CoursesSearchComponent, LoadMoreComponent],
+  declarations: [CoursesComponent, CourseComponent, CoursesSearchComponent, LoadMoreComponent, DurationConverterPipe, OrderByPipe],
   imports: [
     CommonModule,
     AppRoutingModule,
-    SharedModule
+    SharedModule,
+    FormsModule
   ]
 })
 export class CoursesModule {

@@ -11,7 +11,6 @@ export class CourseComponent {
   @Input()
   public course: Course;
 
-  // tslint:disable-next-line:no-output-on-prefix
   @Output()
   public delete: EventEmitter<number> = new EventEmitter<number>();
 
@@ -19,6 +18,6 @@ export class CourseComponent {
 
   public onDelete() {
     this.delete.emit(this.course.id);
-}
+  }
 
 }

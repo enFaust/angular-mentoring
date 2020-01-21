@@ -10,8 +10,8 @@ import {CopyrightComponent} from './components/copyright/copyright.component';
 import {NotFoundComponent} from './components/not-found/not-found.component';
 import {WrapperPage} from './components/wrapper-page/wrapper.page';
 import {RouterModule} from "@angular/router";
+import { ChangePlateBorderDirective } from './derictives/change-plate-border.directive';
 import { LoginPage } from './components/login-page/login.page';
-import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
 
 
 @NgModule({
@@ -24,18 +24,20 @@ import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
     CopyrightComponent,
     NotFoundComponent,
     WrapperPage,
+    ChangePlateBorderDirective,
+    WrapperPage,
     LoginPage
   ],
   exports: [
     FooterComponent,
     HeaderComponent,
     BreadcrumbsComponent,
-    WrapperPage
+    WrapperPage,
+    ChangePlateBorderDirective,
   ],
   imports: [
     CommonModule,
     RouterModule,
-    NgbModule
   ],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA,
