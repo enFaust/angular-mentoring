@@ -19,7 +19,8 @@ export class CoursesComponent implements OnInit {
   }
 
   public onDelete(id: number): void {
-    console.log('Drop course with id: ' + id);
-   // this.courses = this.courses.filter((item: Course) => item.id !== id);
+    if (confirm('Do you really want to delete this course?')){
+      this.coursesService.removeCourse(id);
+    }
   }
 }

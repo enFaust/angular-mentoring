@@ -10,6 +10,8 @@ import {CopyrightComponent} from './components/copyright/copyright.component';
 import {NotFoundComponent} from './components/not-found/not-found.component';
 import {WrapperPage} from './components/wrapper-page/wrapper.page';
 import {RouterModule} from "@angular/router";
+import { LoginPage } from './components/login-page/login.page';
+import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
 
 
 @NgModule({
@@ -21,7 +23,8 @@ import {RouterModule} from "@angular/router";
     BreadcrumbsComponent,
     CopyrightComponent,
     NotFoundComponent,
-    WrapperPage
+    WrapperPage,
+    LoginPage
   ],
   exports: [
     FooterComponent,
@@ -31,7 +34,8 @@ import {RouterModule} from "@angular/router";
   ],
   imports: [
     CommonModule,
-    RouterModule
+    RouterModule,
+    NgbModule
   ],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA,
