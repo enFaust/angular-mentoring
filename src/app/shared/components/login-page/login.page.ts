@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {AuthService} from "../../service/auth/auth.service";
 
 @Component({
@@ -8,9 +8,13 @@ import {AuthService} from "../../service/auth/auth.service";
 })
 export class LoginPage implements OnInit {
 
+  // @ts-ignore
+  @ViewChild('login')
+  private login: ElementRef;
 
-  private login: String;
-  private password: String;
+  // @ts-ignore
+  @ViewChild("password")
+  private password: ElementRef;
 
   constructor(private authService: AuthService) {}
 
@@ -18,9 +22,10 @@ export class LoginPage implements OnInit {
   }
 
   public authorization() {
-    this.authService.authorization(this.login, this.password);
-    console.log("auth")
-    window.location.href = "/";
+    const login = this.login.nativeElement.value;
+    const password = this.password.nativeElement.value;
+
+    this.authService.authorization(login, password);
   }
 
 }

@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, DoCheck, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {User} from '../../model/course/user';
 import {AuthService} from "../../service/auth/auth.service";
 
@@ -7,14 +7,14 @@ import {AuthService} from "../../service/auth/auth.service";
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css']
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent implements DoCheck {
 
   public user: User;
 
   constructor(private authService: AuthService) {
   }
 
-  ngOnInit() {
+  ngDoCheck(): void {
     this.user = this.authService.getUserInfo();
   }
 

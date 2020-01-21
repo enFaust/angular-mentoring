@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 import {AuthorizedUser} from "../../model/course/impl/authorized-user";
 import {User} from "../../model/course/user";
+import {Router} from "@angular/router";
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +10,7 @@ export class AuthService {
 
   private user: AuthorizedUser;
 
-  constructor() {
+  constructor(public router: Router) {
   }
 
   public getUserInfo(): AuthorizedUser {
@@ -17,9 +18,11 @@ export class AuthService {
   }
 
   public authorization(login: String, password: String): void {
-    let user = this.getUserInfo();
+    let user = new AuthorizedUser(1, 'Alex', 'Nikolson', 'user', 'user');
+
     if (login === user.login && password === user.password) {
-      this.user = new AuthorizedUser(1, 'Alex', 'Nikolson', 'user', 'user');
+      this.user = user;
+      this.router.navigate(['']);
     }
   }
 

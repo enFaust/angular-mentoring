@@ -1,6 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {User} from "../../model/course/user";
 import {ModalDismissReasons, NgbModal} from "@ng-bootstrap/ng-bootstrap";
+import {UserService} from "../../service/user/user.service";
 
 @Component({
   selector: 'app-user-menu',
@@ -10,16 +11,13 @@ import {ModalDismissReasons, NgbModal} from "@ng-bootstrap/ng-bootstrap";
 export class UserMenuComponent implements OnInit {
 
   @Input()
-  public user: User;
+  public user: User ;
 
   @Output()
   public logOut: EventEmitter<string> = new EventEmitter<string>();
 
   ngOnInit() {
   }
-
-
-  constructor() {}
 
   public logout(){
     this.logOut.emit();
