@@ -11,7 +11,7 @@ export class UserService {
   }
 
   public getUser(): User {
-    return new AuthorizedUser(1, 'Alex', 'Nikolson');
+    return new AuthorizedUser(1, 'Alex', 'Nikolson', 'login', 'password');
   }
 }
 

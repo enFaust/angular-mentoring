@@ -1,20 +1,25 @@
-import {Component, CUSTOM_ELEMENTS_SCHEMA, NgModule, OnInit} from '@angular/core';
-import {UserService} from '../../service/user/user.service';
+import {Component, DoCheck, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {User} from '../../model/course/user';
+import {AuthService} from "../../service/auth/auth.service";
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css']
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent implements DoCheck {
 
   public user: User;
 
-  constructor(private userService: UserService) { }
-
-  ngOnInit() {
-    this.user = this.userService.getUser();
+  constructor(private authService: AuthService) {
   }
 
+  ngDoCheck(): void {
+    this.user = this.authService.getUserInfo();
+  }
+
+  public logout() {
+    this.authService.logout();
+    this.user = undefined;
+  }
 }

@@ -1,5 +1,7 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {User} from "../../model/course/user";
+import {ModalDismissReasons, NgbModal} from "@ng-bootstrap/ng-bootstrap";
+import {UserService} from "../../service/user/user.service";
 
 @Component({
   selector: 'app-user-menu',
@@ -9,11 +11,15 @@ import {User} from "../../model/course/user";
 export class UserMenuComponent implements OnInit {
 
   @Input()
-  public user: User;
+  public user: User ;
 
-  constructor() { }
+  @Output()
+  public logOut: EventEmitter<string> = new EventEmitter<string>();
 
   ngOnInit() {
   }
 
+  public logout(){
+    this.logOut.emit();
+  }
 }

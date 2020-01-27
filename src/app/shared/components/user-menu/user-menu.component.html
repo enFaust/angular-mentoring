@@ -1,1 +1,9 @@
-<span class="text-capitalize text-light" id="{{user?.id}}">{{user?.firstName}} {{user?.lastName}}</span>
+<div *ngIf="!user">
+  <span class="text-capitalize text-light">{{user?.firstName}} {{user?.lastName}}</span>
+  <button class="btn btn-outline-light my-2 my-sm-0" routerLink="/login">Login</button>
+</div>
+
+<div *ngIf="user">
+  <span class="text-capitalize text-light">{{user?.firstName}} {{user?.lastName}}</span>
+  <button class="btn btn-outline-light my-2 my-sm-0" (click)="logout()" >Log out</button>
+</div>

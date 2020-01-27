@@ -4,7 +4,7 @@
       <app-logo></app-logo>
     </a>
     <div class=" col-2">
-      <app-user-menu [user]="user"></app-user-menu>
+      <app-user-menu (logOut)="logout()" [user]="user"></app-user-menu>
     </div>
   </nav>
 </header>
