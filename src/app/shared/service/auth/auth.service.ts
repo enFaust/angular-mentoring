@@ -22,7 +22,6 @@ export class AuthService {
 
     if (login === user.login && password === user.password) {
       this.auth = true;
-      console.log("Logination");
       localStorage.setItem('userId', user.id.toString());
       localStorage.setItem('userFirstName', user.firstName);
       localStorage.setItem('userLastName', user.lastName);
