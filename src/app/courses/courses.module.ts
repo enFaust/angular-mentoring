@@ -9,10 +9,11 @@ import {LoadMoreComponent} from "../shared/components/load-more/load-more.compon
 import {DurationConverterPipe} from "../shared/pipes/duration/duration-converter.pipe";
 import {OrderByPipe} from "../shared/pipes/order-by/order-by.pipe";
 import {FormsModule} from "@angular/forms";
+import { AddCoursePage } from './components/add-course/add-course-page';
 
 
 @NgModule({
-  declarations: [CoursesComponent, CourseComponent, CoursesSearchComponent, LoadMoreComponent, DurationConverterPipe, OrderByPipe],
+  declarations: [CoursesComponent, CourseComponent, CoursesSearchComponent, LoadMoreComponent, DurationConverterPipe, OrderByPipe, AddCoursePage],
   imports: [
     CommonModule,
     AppRoutingModule,

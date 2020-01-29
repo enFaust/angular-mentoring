@@ -1,0 +1,22 @@
+<form (submit)="save()">
+  <div class="form-group">
+    <label for="formTitleInput">Title:</label>
+    <input type="text" class="form-control" id="formTitleInput" name="title" [(ngModel)]="title" placeholder="Title">
+  </div>
+  <div class="form-group">
+    <label for="formDescriptionInput">Description:</label>
+    <textarea class="form-control" id="formDescriptionInput" name="description" [(ngModel)]="description" rows="4"></textarea>
+  </div>
+  <div class="form-group">
+    <label for="formDateInput">Date:</label>
+    <input type="date" class="form-control" id="formDateInput" name="date" [(ngModel)]="date" placeholder="Date">
+  </div>
+  <div class="form-group">
+    <label for="formDurationInput">Duration ({{duration | durationConverter}}):</label>
+    <input type="text" class="form-control" id="formDurationInput" name="duration" [(ngModel)]="duration" placeholder="Duration">
+  </div>
+  <button class="btn btn-outline-success" type="submit" role="button">Save</button>
+  <button class="btn btn-outline-danger" routerLink="" role="button">Cancel</button>
+</form>
+
+

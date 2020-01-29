@@ -7,19 +7,12 @@ import {AuthService} from "../../service/auth/auth.service";
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css']
 })
-export class HeaderComponent implements DoCheck {
-
-  public user: User;
+export class HeaderComponent {
 
   constructor(private authService: AuthService) {
   }
 
-  ngDoCheck(): void {
-    this.user = this.authService.getUserInfo();
-  }
-
   public logout() {
     this.authService.logout();
-    this.user = undefined;
   }
 }

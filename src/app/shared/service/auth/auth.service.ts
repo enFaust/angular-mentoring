@@ -8,25 +8,33 @@ import {Router} from "@angular/router";
 })
 export class AuthService {
 
-  private user: AuthorizedUser;
+  private auth: boolean = false;
 
   constructor(public router: Router) {
   }
 
-  public getUserInfo(): AuthorizedUser {
-    return this.user;
+  public isAuthorized(){
+    return this.auth;
   }
 
-  public authorization(login: String, password: String): void {
+  public login(login: String, password: String): void {
     let user = new AuthorizedUser(1, 'Alex', 'Nikolson', 'user', 'user');
 
     if (login === user.login && password === user.password) {
-      this.user = user;
+      this.auth = true;
+      console.log("Logination");
+      localStorage.setItem('userId', user.id.toString());
+      localStorage.setItem('userFirstName', user.firstName);
+      localStorage.setItem('userLastName', user.lastName);
       this.router.navigate(['']);
     }
   }
 
-  public logout(): User {
-    return undefined;
+  public logout() {
+    this.auth = false;
+
+    localStorage.removeItem('userId');
+    localStorage.removeItem('userFirstName');
+    localStorage.removeItem('userLastName');
   }
 }
