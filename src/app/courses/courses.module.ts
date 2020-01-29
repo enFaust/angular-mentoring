@@ -8,7 +8,7 @@ import {AppRoutingModule} from '../app-routing.module';
 import {LoadMoreComponent} from "../shared/components/load-more/load-more.component";
 import {DurationConverterPipe} from "../shared/pipes/duration/duration-converter.pipe";
 import {OrderByPipe} from "../shared/pipes/order-by/order-by.pipe";
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { AddCoursePage } from './components/add-course/add-course-page';
 
 
@@ -18,7 +18,8 @@ import { AddCoursePage } from './components/add-course/add-course-page';
     CommonModule,
     AppRoutingModule,
     SharedModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ]
 })
 export class CoursesModule {
