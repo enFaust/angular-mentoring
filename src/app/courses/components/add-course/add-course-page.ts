@@ -11,10 +11,10 @@ import {Router} from "@angular/router";
 })
 export class AddCoursePage implements OnInit {
 
-  private title: string;
-  private description: string;
-  private date: string;
-  private duration: number = 0;
+  title: string;
+  description: string;
+  date: string;
+  duration: number = 0;
 
   constructor(private coursesService: CourseService, public router: Router) {
   }

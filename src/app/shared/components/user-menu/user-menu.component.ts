@@ -11,9 +11,9 @@ import {AuthService} from "../../service/auth/auth.service";
 })
 export class UserMenuComponent implements OnChanges, OnInit {
 
-  private userFirstName: String;
+  userFirstName: String;
 
-  private userSecondName: String;
+  userSecondName: String;
 
   @Output()
   public logOut: EventEmitter<string> = new EventEmitter<string>();
