@@ -27,9 +27,6 @@ export class AddCoursePage implements OnInit {
 
   public save() {
 
-    console.log(this.myForm)
-    console.log(this.myForm.controls['description'].valid)
-
     if (this.myForm.valid) {
       let title = this.myForm.controls['title'].value;
       let date = this.myForm.controls['date'].value;
