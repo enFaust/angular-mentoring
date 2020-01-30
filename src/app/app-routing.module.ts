@@ -7,9 +7,10 @@ import {AddCoursePage} from "./courses/components/add-course/add-course-page";
 
 
 const routes: Routes = [
-  {path: '', component: CoursesComponent},
+  { path: "", redirectTo: "courses", pathMatch: "full" },
+  {path: 'courses', component: CoursesComponent},
   {path: 'login', component: LoginPage},
-  {path: 'addCourse', component: AddCoursePage},
+  {path: 'courses/add', component: AddCoursePage},
   {path: '**', component: NotFoundComponent, data: {title: '404'}}
 ];
 
