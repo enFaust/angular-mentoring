@@ -14,10 +14,10 @@ export class AddCoursePage implements OnInit {
   showErrorBlock = false;
 
   myForm: FormGroup = new FormGroup({
-    "title": new FormControl("", [Validators.required, Validators.maxLength(40)]),
-    "description": new FormControl("", [Validators.required, Validators.maxLength(300)]),
+    "title": new FormControl('', [Validators.required, Validators.maxLength(40)]),
+    "description": new FormControl('', [Validators.required, Validators.maxLength(300)]),
     "date": new FormControl('', [Validators.required, Validators.pattern('[0-9]{4}-(0[1-9]|1[012])-(0[1-9]|1[0-9]|2[0-9]|3[01])')]),
-    "duration": new FormControl("", [Validators.required, Validators.pattern('[0-9]*')]),
+    "duration": new FormControl('', [Validators.required, Validators.pattern('[0-9]*')]),
   });
 
   constructor(private coursesService: CourseService, public router: Router) {
