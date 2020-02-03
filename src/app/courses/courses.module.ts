@@ -1,5 +1,5 @@
 import {NgModule} from '@angular/core';
-import {CommonModule} from '@angular/common';
+import {CommonModule, DatePipe} from '@angular/common';
 import {SharedModule} from '../shared/shared.module';
 import {CoursesComponent} from './components/courses/courses.component';
 import {CourseComponent} from './components/course/course.component';
@@ -21,7 +21,8 @@ import { CoursePageComponent } from './components/course-page/course-page.compon
     SharedModule,
     FormsModule,
     ReactiveFormsModule
-  ]
+  ],
+  providers: [DatePipe]
 })
 export class CoursesModule {
 }

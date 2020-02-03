@@ -7,7 +7,6 @@ import {LoadMoreComponent} from '../../../shared/components/load-more/load-more.
 import {OrderByPipe} from "../../../shared/pipes/order-by/order-by.pipe";
 import {DurationConverterPipe} from "../../../shared/pipes/duration/duration-converter.pipe";
 import {ChangePlateBorderDirective} from "../../../shared/derictives/change-plate-border.directive";
-import {CourseService} from "../../service/course/course.service";
 
 describe('CoursesComponent', () => {
   let component: CoursesComponent;

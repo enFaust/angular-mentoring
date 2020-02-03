@@ -1,5 +1,6 @@
 import {ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Course} from '../../model/course/course';
+import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
   selector: 'app-course',
@@ -15,10 +16,17 @@ export class CourseComponent {
   @Output()
   public delete: EventEmitter<number> = new EventEmitter<number>();
 
-  constructor() { }
+  constructor(private router: Router, private route: ActivatedRoute) { }
 
   public onDelete() {
     this.delete.emit(this.course.id);
+  }
+
+  public goToCourse(){
+    console.log(this.course.id);
+    this.router.navigate(["/courses", this.course.id], {
+      relativeTo: this.route,
+    });
   }
 
 }

@@ -1,4 +1,4 @@
-<form [formGroup]="myForm" (ngSubmit)="save()">
+<form [formGroup]="addCourseForm" (ngSubmit)="save()">
   <div class="form-group">
     <label for="formTitleInput">Title:</label>
     <input type="text" name="name" class="form-control" id="formTitleInput" formControlName="title"  placeholder="Title">
@@ -12,14 +12,14 @@
     <input type="date" name="name" class="form-control" id="formDateInput" formControlName="date"  placeholder="Date">
   </div>
   <div class="form-group">
-    <label for="formDurationInput">Duration ({{myForm.controls['duration'].value | durationConverter}}):</label>
+    <label for="formDurationInput">Duration ({{addCourseForm.controls['duration'].value | durationConverter}}):</label>
     <input type="number" name="name" class="form-control" id="formDurationInput" formControlName="duration" placeholder="Duration">
   </div>
   <div class="alert alert-danger" *ngIf="showErrorBlock">
     Form has invalid data
   </div>
   <button class="btn btn-outline-success" type="submit" role="button">Save</button>
-  <button class="btn btn-outline-danger" routerLink="" role="button">Cancel</button>
+  <button class="btn btn-outline-danger" routerLink="/courses" role="button">Cancel</button>
 </form>
 
 
