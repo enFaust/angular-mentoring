@@ -24,7 +24,6 @@ export class AddCoursePage implements OnInit {
   }
 
   ngOnInit() {
-    console.log("ss");
     this.formChanges();
   }
 

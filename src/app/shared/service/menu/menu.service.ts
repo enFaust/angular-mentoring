@@ -19,7 +19,7 @@ export class MenuService {
             },
             {
               name: 'Edit',
-              path: './:id',
+              path: './edit/**',
             },
           ]
       }];

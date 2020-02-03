@@ -23,8 +23,7 @@ export class CourseComponent {
   }
 
   public goToCourse(){
-    console.log(this.course.id);
-    this.router.navigate(["/courses", this.course.id], {
+    this.router.navigate(["/courses/edit", this.course.id], {
       relativeTo: this.route,
     });
   }

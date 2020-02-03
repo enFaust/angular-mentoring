@@ -25,7 +25,7 @@ const routes: Routes = [
     component: AddCoursePage
   },
   {
-    path: 'courses/:id',
+    path: 'courses/edit/:id',
     component: CoursePageComponent
   },
   {
