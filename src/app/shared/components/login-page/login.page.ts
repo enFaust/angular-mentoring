@@ -19,13 +19,14 @@ export class LoginPage implements OnInit {
   constructor(private authService: AuthService) {}
 
   ngOnInit(): void {
+
   }
 
   public authorization() {
     const login = this.login.nativeElement.value;
     const password = this.password.nativeElement.value;
 
-    this.authService.authorization(login, password);
+    this.authService.login(login, password);
   }
 
 }

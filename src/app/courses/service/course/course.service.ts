@@ -35,6 +35,7 @@ export class CourseService {
   }
 
   public createCourse(course: Course) {
+    console.log(course);
     this.courses.push(course);
   }
 
