@@ -14,27 +14,40 @@ const routes: Routes = [
   {
     path: 'login',
     component: LoginPage,
+    data: {
+      breadcrumb: 'Login'
+    },
   },
   {
     path: 'courses',
     component: CoursesComponent,
-    canActivate: [AuthGuard],
+    canActivate: [AuthGuard],data: {
+      breadcrumb: 'Courses'
+    }
   },
   {
     path: 'courses/add',
-    component: AddCoursePage
+    component: AddCoursePage,
+    data: {
+      breadcrumb: 'Add'
+    },
+
   },
   {
-    path: 'courses/edit/:id',
-    component: CoursePageComponent
+    path: 'courses/:id',
+    component: CoursePageComponent,
+    data: {
+      breadcrumb: 'Edit'
+    }
   },
   {
-    path: 'courses/edit/**',
+    path: 'courses/**',
     component: NotFoundComponent
   },
   {
     path: '**',
     component: NotFoundComponent
+
   }
 ];
 

@@ -1,10 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, NavigationEnd, Router} from "@angular/router";
-import {MenuItem} from 'primeng/api';
-import {MenuService} from "../../service/menu/menu.service";
-import {filter} from 'rxjs/operators';
-import {isNullOrUndefined} from "util";
-import {BreadcrumbService} from "angular-crumbs";
+import {BreadCrumb} from "../../model/readcrumb/breadcrumb";
+import {distinctUntilChanged, filter, map} from "rxjs/operators";
 
 @Component({
   selector: 'app-breadcrumbs',
@@ -13,38 +10,37 @@ import {BreadcrumbService} from "angular-crumbs";
 })
 export class BreadcrumbsComponent implements OnInit {
 
-  name: string;
-  menu: Array<any> = [];
-  breadcrumbList: Array<any> = [];
+  breadcrumbs$ = this.router.events.pipe(
+    filter(event => event instanceof NavigationEnd),
+    distinctUntilChanged(),
+    map(event => this.buildBreadCrumb(this.activatedRoute.root))
+  );
 
-  constructor(private router: Router,private activatedRoute:ActivatedRoute, private  menuService: MenuService) {
-    this.menu = menuService.getMenu();
-    this.listenRouting()
+  name: string;
+
+  constructor(private router: Router,private activatedRoute:ActivatedRoute) {
+
   }
 
   ngOnInit() {
+
   }
 
-  listenRouting() {
-    let routerUrl: string, routerList: Array<any>, target: any;
-    this.router.events.subscribe((router: any) => {
-      routerUrl = router.urlAfterRedirects;
-      if (routerUrl && typeof routerUrl === 'string') {
-        target = this.menu;
-        this.breadcrumbList.length = 0;
-        routerList = routerUrl.slice(1).split('/');
-        routerList.forEach((router, index) => {
-          target = target.find(page => page.path.slice(2) === router);
-          this.breadcrumbList.push({
-            name: target.name,
-            path: (index === 0) ? target.path : `${this.breadcrumbList[index-1].path}/${target.path.slice(2)}`
-          });
+  buildBreadCrumb(route: ActivatedRoute, url: string = '',
+                  breadcrumbs: Array<BreadCrumb> = []): Array<BreadCrumb> {
+    const label = route.routeConfig ? route.routeConfig.data[ 'breadcrumb' ] : 'Home';
+    const path = route.routeConfig ? route.routeConfig.path : '';
 
-          if (index+1 !== routerList.length) {
-            target = target.children;
-          }
-        });
-      }
-    });
+    const nextUrl = `${url}${path}/`;
+    const breadcrumb = {
+      label: label,
+      url: nextUrl
+    };
+    const newBreadcrumbs = [ ...breadcrumbs, breadcrumb ];
+    if (route.firstChild) {
+      return this.buildBreadCrumb(route.firstChild, nextUrl, newBreadcrumbs);
+    }
+    return newBreadcrumbs;
   }
+
 }
