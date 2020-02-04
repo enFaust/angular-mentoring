@@ -1,7 +1,7 @@
 import {TestBed, async} from '@angular/core/testing';
 import {RouterTestingModule} from '@angular/router/testing';
 import {AppComponent} from './app.component';
-import {WrapperPage} from "./shared/components/wrapper-page/wrapper.page";
+import {WrapperPage} from "./shared/pages/wrapper-page/wrapper.page";
 import {HeaderComponent} from "./shared/components/header/header.component";
 import {BreadcrumbsComponent} from "./shared/components/breadcrumbs/breadcrumbs.component";
 import {FooterComponent} from "./shared/components/footer/footer.component";

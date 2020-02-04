@@ -5,6 +5,7 @@ import {CourseService} from "../../service/course/course.service";
 import {Course} from "../../model/course/course";
 import {DatePipe} from "@angular/common";
 import {CommonCourse} from "../../model/course/impl/common-course";
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-course-page',
@@ -13,13 +14,14 @@ import {CommonCourse} from "../../model/course/impl/common-course";
 })
 export class CoursePageComponent implements OnInit {
 
+
   id: number;
   course: Course;
   date: string;
   showErrorBlock = false;
   editCourseForm: FormGroup;
 
-  constructor(private router: ActivatedRoute, private coursesService: CourseService, private datePipe: DatePipe, private route: Router) {
+  constructor(private router: ActivatedRoute, private coursesService: CourseService, private datePipe: DatePipe, private route: Router,  private titleService: Title) {
 
   }
 
@@ -32,6 +34,8 @@ export class CoursePageComponent implements OnInit {
 
     this.date = this.datePipe.transform(this.course.creationDate, "yyyy-MM-dd");
 
+    this.titleService.setTitle(this.course.title);
+
     this.editCourseForm = new FormGroup({
       "title": new FormControl(this.course.title, [Validators.required, Validators.maxLength(40)]),
       "description": new FormControl(this.course.description, [Validators.required, Validators.maxLength(3000)]),
@@ -41,6 +45,8 @@ export class CoursePageComponent implements OnInit {
       ]),
       "duration": new FormControl(this.course.duration, [Validators.required, Validators.pattern('[0-9]*')]),
     });
+
+
   }
 
 

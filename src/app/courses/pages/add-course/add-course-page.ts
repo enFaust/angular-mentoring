@@ -3,6 +3,7 @@ import {CourseService} from "../../service/course/course.service";
 import {CommonCourse} from "../../model/course/impl/common-course";
 import {FormControl, FormGroup, FormsModule, Validators} from '@angular/forms';
 import {Router} from "@angular/router";
+import {Title} from "@angular/platform-browser";
 
 @Component({
   selector: 'app-add-course',
@@ -11,6 +12,7 @@ import {Router} from "@angular/router";
 })
 export class AddCoursePage implements OnInit {
 
+  public static TITLE: string = "Add new course";
   showErrorBlock = false;
 
   addCourseForm: FormGroup = new FormGroup({
@@ -20,11 +22,12 @@ export class AddCoursePage implements OnInit {
     "duration": new FormControl('', [Validators.required, Validators.pattern('[0-9]*')]),
   });
 
-  constructor(private coursesService: CourseService, private router: Router) {
+  constructor(private coursesService: CourseService, private router: Router,  private titleService: Title) {
   }
 
   ngOnInit() {
     this.formChanges();
+    this.titleService.setTitle(AddCoursePage.TITLE);
   }
 
   formChanges() {

@@ -1,10 +1,10 @@
 import {CUSTOM_ELEMENTS_SCHEMA, NgModule} from '@angular/core';
 import {Routes, RouterModule} from '@angular/router';
-import {NotFoundComponent} from './shared/components/not-found/not-found.component';
-import {CoursesComponent} from './courses/components/courses/courses.component';
-import {LoginPage} from "./shared/components/login-page/login.page";
-import {AddCoursePage} from "./courses/components/add-course/add-course-page";
-import {CoursePageComponent} from "./courses/components/course-page/course-page.component";
+import {NotFoundComponent} from './shared/pages/not-found/not-found.component';
+import {CoursesComponent} from './courses/pages/courses/courses.component';
+import {LoginPage} from "./shared/pages/login-page/login.page";
+import {AddCoursePage} from "./courses/pages/add-course/add-course-page";
+import {CoursePageComponent} from "./courses/pages/course-page/course-page.component";
 import {AuthGuard} from "./auth.guard";
 
 
@@ -29,9 +29,12 @@ const routes: Routes = [
     component: CoursePageComponent
   },
   {
+    path: 'courses/edit/**',
+    component: NotFoundComponent
+  },
+  {
     path: '**',
-    component: NotFoundComponent,
-    data: {title: '404'}
+    component: NotFoundComponent
   }
 ];
 
