@@ -15,39 +15,67 @@ const routes: Routes = [
     path: 'login',
     component: LoginPage,
     data: {
-      breadcrumb: 'Login'
+      breadcrumb: 'Login',
+      title: 'Login'
     },
   },
   {
     path: 'courses',
     component: CoursesComponent,
-    canActivate: [AuthGuard],data: {
-      breadcrumb: 'Courses'
-    }
+/*    canActivate: [AuthGuard],
+    canActivateChild: [AuthGuard],*/
+    data: {
+      breadcrumb: 'Courses',
+      title: 'Courses'
+    },
+    children: [
+      {
+        path: 'add',
+        component: AddCoursePage,
+        data: {
+          breadcrumb: 'Add',
+          title: 'Add course'
+        },
+      },
+      {
+        path: ':id',
+        component: CoursePageComponent,
+        data: {
+          breadcrumb: 'Edit',
+          title: 'Edit Course'
+        }
+      },
+    ]
   },
-  {
+ /* {
     path: 'courses/add',
     component: AddCoursePage,
     data: {
-      breadcrumb: 'Add'
+      breadcrumb: 'Add',
+      title: 'Add course'
     },
-
   },
   {
     path: 'courses/:id',
     component: CoursePageComponent,
     data: {
-      breadcrumb: 'Edit'
+      breadcrumb: 'Edit',
+      title: 'Edit Course'
+    }
+  },*/
+  {
+    path: 'courses/**',
+    component: NotFoundComponent,
+    data: {
+      title: 'Page not found'
     }
   },
   {
-    path: 'courses/**',
-    component: NotFoundComponent
-  },
-  {
     path: '**',
-    component: NotFoundComponent
-
+    component: NotFoundComponent,
+    data: {
+      title: 'Page not found'
+    }
   }
 ];
 
