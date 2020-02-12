@@ -14,7 +14,9 @@ export class AuthService {
   }
 
   public isAuthorized(){
-    return this.auth;
+    let userId = localStorage.getItem('userId');
+
+    return userId != null;
   }
 
   public login(login: String, password: String): void {
@@ -25,7 +27,7 @@ export class AuthService {
       localStorage.setItem('userId', user.id.toString());
       localStorage.setItem('userFirstName', user.firstName);
       localStorage.setItem('userLastName', user.lastName);
-      this.router.navigate(['']);
+      this.router.navigate(['/courses']);
     }
   }
 
@@ -35,5 +37,6 @@ export class AuthService {
     localStorage.removeItem('userId');
     localStorage.removeItem('userFirstName');
     localStorage.removeItem('userLastName');
+    this.router.navigate(['/login']);
   }
 }

@@ -6,11 +6,12 @@ import {LogoComponent} from './components/logo/logo.component';
 import {UserMenuComponent} from './components/user-menu/user-menu.component';
 import {BreadcrumbsComponent} from './components/breadcrumbs/breadcrumbs.component';
 import {CopyrightComponent} from './components/copyright/copyright.component';
-import {NotFoundComponent} from './components/not-found/not-found.component';
-import {WrapperPage} from './components/wrapper-page/wrapper.page';
+import {NotFoundComponent} from './pages/not-found/not-found.component';
+import {WrapperPage} from './pages/wrapper-page/wrapper.page';
 import {RouterModule} from "@angular/router";
-import { ChangePlateBorderDirective } from './derictives/change-plate-border.directive';
-import { LoginPage } from './components/login-page/login.page';
+import {ChangePlateBorderDirective} from './derictives/change-plate-border.directive';
+import {LoginPage} from './pages/login-page/login.page';
+import {BreadcrumbModule} from "primeng";
 
 
 @NgModule({
@@ -37,6 +38,8 @@ import { LoginPage } from './components/login-page/login.page';
   imports: [
     CommonModule,
     RouterModule,
+    BreadcrumbModule,
+    BreadcrumbModule,
   ],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA,

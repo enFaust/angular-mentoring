@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {CourseService} from '../../service/course/course.service';
 import {Course} from '../../model/course/course';
+import {Title} from "@angular/platform-browser";
 
 @Component({
   selector: 'app-courses',
@@ -9,15 +10,18 @@ import {Course} from '../../model/course/course';
 })
 export class CoursesComponent implements OnInit {
 
+  public static TITLE: string = "Add new course";
+
   public courses: Course[];
   public allCourses: Course[];
 
-  constructor(private coursesService: CourseService) {
+  constructor(private coursesService: CourseService, private titleService: Title) {
   }
 
   ngOnInit() {
     this.courses = this.coursesService.getCourses();
     this.allCourses = this.courses;
+    this.titleService.setTitle(CoursesComponent.TITLE);
   }
 
   public onDelete(id: number): void {
