@@ -38,12 +38,12 @@ export class AddCoursePage implements OnInit {
 
   public save() {
     if (this.addCourseForm.valid) {
-      let title = this.addCourseForm.controls['title'].value;
+      let title = this.addCourseForm.controls['name'].value;
       let date = this.addCourseForm.controls['date'].value;
-      let duration = this.addCourseForm.controls['duration'].value;
+      let duration = this.addCourseForm.controls['length'].value;
       let description = this.addCourseForm.controls['description'].value;
 
-      this.coursesService.createCourse(new CommonCourse(0, title, new Date(date), duration, description, false));
+      this.coursesService.createCourse(new CommonCourse(0, title, new Date(date), duration, description, false)).subscribe();
       this.router.navigate(['/courses']);
     } else {
       this.showErrorBlock = true;

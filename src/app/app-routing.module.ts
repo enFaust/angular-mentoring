@@ -20,15 +20,21 @@ const routes: Routes = [
     },
   },
   {
+    canActivateChild: [AuthGuard],
     path: 'courses',
-    component: CoursesComponent,
-/*    canActivate: [AuthGuard],
-    canActivateChild: [AuthGuard],*/
     data: {
       breadcrumb: 'Courses',
       title: 'Courses'
     },
     children: [
+      {
+        path: '',
+        component: CoursesComponent,
+        data: {
+          breadcrumb: 'All Courses',
+          title: 'Courses'
+        },
+      },
       {
         path: 'add',
         component: AddCoursePage,
@@ -47,22 +53,22 @@ const routes: Routes = [
       },
     ]
   },
- /* {
-    path: 'courses/add',
-    component: AddCoursePage,
-    data: {
-      breadcrumb: 'Add',
-      title: 'Add course'
-    },
-  },
-  {
-    path: 'courses/:id',
-    component: CoursePageComponent,
-    data: {
-      breadcrumb: 'Edit',
-      title: 'Edit Course'
-    }
-  },*/
+  /* {
+     path: 'courses/add',
+     component: AddCoursePage,
+     data: {
+       breadcrumb: 'Add',
+       name: 'Add course'
+     },
+   },
+   {
+     path: 'courses/:id',
+     component: CoursePageComponent,
+     data: {
+       breadcrumb: 'Edit',
+       name: 'Edit Course'
+     }
+   },*/
   {
     path: 'courses/**',
     component: NotFoundComponent,

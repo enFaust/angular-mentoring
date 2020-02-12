@@ -12,7 +12,7 @@
     <input type="date" name="name" class="form-control" id="formDateInput" formControlName="date">
   </div>
   <div class="form-group">
-    <label for="formDurationInput">Duration ({{editCourseForm.controls['duration'].value | durationConverter}}):</label>
+    <label for="formDurationInput">Duration ({{editCourseForm.controls['length'].value | durationConverter}}):</label>
     <input type="number" name="name" class="form-control" id="formDurationInput" formControlName="duration" placeholder="Duration">
   </div>
   <div class="alert alert-danger" *ngIf="showErrorBlock">

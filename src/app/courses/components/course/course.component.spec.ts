@@ -48,8 +48,8 @@ describe('CourseComponent', () => {
     expect(cartTitle.textContent).toContain('1');
   });
 
-  it('course title expect', () => {
-    const cartTitle = fixture.debugElement.query(By.css('.card-title')).nativeElement;
+  it('course name expect', () => {
+    const cartTitle = fixture.debugElement.query(By.css('.card-name')).nativeElement;
     expect(cartTitle.textContent).toContain('VIDEO COURSE 1. NAME TAG');
   });
 
@@ -58,8 +58,8 @@ describe('CourseComponent', () => {
     expect(cartTitle.textContent).toContain('15 Jan 2020');
   });
 
-  it('course duration expect', () => {
-    const cartTitle = fixture.debugElement.query(By.css('.duration')).nativeElement;
+  it('course length expect', () => {
+    const cartTitle = fixture.debugElement.query(By.css('.length')).nativeElement;
     expect(cartTitle.textContent).toContain('2h');
   });
 

@@ -32,18 +32,18 @@ export class CoursePageComponent implements OnInit {
       this.course = this.coursesService.getCourseById(this.id);
     });
 
-    this.date = this.datePipe.transform(this.course.creationDate, "yyyy-MM-dd");
+    this.date = this.datePipe.transform(this.course.date, "yyyy-MM-dd");
 
-    this.titleService.setTitle(this.course.title);
+    this.titleService.setTitle(this.course.name);
 
     this.editCourseForm = new FormGroup({
-      "title": new FormControl(this.course.title, [Validators.required, Validators.maxLength(40)]),
+      "title": new FormControl(this.course.name, [Validators.required, Validators.maxLength(40)]),
       "description": new FormControl(this.course.description, [Validators.required, Validators.maxLength(3000)]),
       "date": new FormControl(this.date, [
         Validators.required,
         Validators.pattern('[0-9]{4}-(0[1-9]|1[012])-(0[1-9]|1[0-9]|2[0-9]|3[01])')
       ]),
-      "duration": new FormControl(this.course.duration, [Validators.required, Validators.pattern('[0-9]*')]),
+      "duration": new FormControl(this.course.length, [Validators.required, Validators.pattern('[0-9]*')]),
     });
 
 
@@ -52,9 +52,9 @@ export class CoursePageComponent implements OnInit {
 
   public edit() {
       if (this.editCourseForm.valid) {
-        let title = this.editCourseForm.controls['title'].value;
+        let title = this.editCourseForm.controls['name'].value;
         let date = this.editCourseForm.controls['date'].value;
-        let duration = this.editCourseForm.controls['duration'].value;
+        let duration = this.editCourseForm.controls['length'].value;
         let description = this.editCourseForm.controls['description'].value;
 
         this.coursesService.updateCourse(new CommonCourse(this.id, title, date, duration, description, false));

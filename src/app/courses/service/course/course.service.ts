@@ -1,58 +1,47 @@
-import {Injectable} from '@angular/core';
+import {Injectable, OnDestroy} from '@angular/core';
 import {Course} from "../../model/course/course";
 import {CommonCourse} from "../../model/course/impl/common-course";
+import {HttpClient} from "@angular/common/http";
+import {Observable} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
 })
-export class CourseService {
+export class CourseService implements OnDestroy {
 
-  public courses: Course[] = [
-    new CommonCourse(1, `Video Course 1. Name tag`, new Date(2020, 0, 12), 180,
-      'Learn about where you can find course descriptions, what information they include, how they work, ' +
-      'and details about various components of a course description. Course descriptions report information about a ' +
-      'university or college\'s classes. They\'re published both in course catalogs that outline degree requirements and' +
-      ' in course schedules that contain descriptions for all courses offered during a particular semester.', true),
-    new CommonCourse(2, `Video Course 2. Name tag`, new Date(2019, 0, 12), 30,
-      'Learn about where you can find course descriptions, what information they include, how they work,' +
-      ' and details about various components of a course description. Course descriptions report information about a' +
-      ' university or college\'s classes. They\'re published both in course catalogs that outline degree requirements and' +
-      ' in course schedules that contain descriptions for all courses offered during a particular semester.', false),
-    new CommonCourse(3, `Video Course 3. Name tag`, new Date(2021, 0, 12), 190,
-      'Learn about where you can find course descriptions, what information they include, how they work, ' +
-      'and details about various components of a course description. Course descriptions report information about a' +
-      ' university or college\'s classes. They\'re published both in course catalogs that outline degree requirements' +
-      ' and in course schedules that contain descriptions for all courses offered during a particular semester.', false),
-    new CommonCourse(4, `Video Course 4. Name tag`,  new Date(2018, 0, 12), 13,
-      'Learn about where you can find course descriptions, what information they include, how they work,' +
-      ' and details about various components of a course description. Course descriptions report information about a' +
-      ' university or college\'s classes. They\'re published both in course catalogs that outline degree requirements ' +
-      'and in course schedules that contain descriptions for all courses offered during a particular semester.', true),
-  ]
+  start: number = 0;
+  count: number;
+  courses: Course[] = [];
 
+  private readonly HOST = 'http://localhost:3004';
 
-  constructor() {
+  constructor(private httpClient: HttpClient) {
+    this.count = 5;
   }
 
-  public createCourse(course: Course) {
-    console.log(course);
-    this.courses.push(course);
+  public createCourse(course: Course): Observable<Course> {
+    return this.httpClient.post<Course>(this.HOST + '/courses', course);
   }
 
-  public getCourses(): Course[] {
-    return this.courses;
+  public getCourses(): Observable<Course[]> {
+    return this.httpClient.get<Course[]>(this.HOST + "/courses?start=" + this.start + "&count=" + this.count)
+  }
+
+  public searchCourses(title: string): Observable<Course[]> {
+    return this.httpClient.get<Course[]>(this.HOST + "/courses?textFragment="+title);
   }
 
   public getCourseById(id: number): Course {
     return this.courses.find(item => item.id == id);
   }
 
-  public removeCourse(id: number) {
-    for (let i = 0; i < this.courses.length; i++) {
-      if (this.courses[i].id == id) {
-        this.courses.splice(i, 1);
-      }
-    }
+  public removeCourse(id: number): Observable<{}> {
+    return this.httpClient.delete(this.HOST + '/courses/' + id);
+  }
+
+  public loadMore(): Observable<Course[]> {
+    this.count += 5;
+    return this.httpClient.get<Course[]>(this.HOST + "/courses?start=" + this.start + "&count=" + this.count);
   }
 
   public updateCourse(course: Course): boolean {
@@ -63,5 +52,9 @@ export class CourseService {
       }
     }
     return false;
+  }
+
+
+  ngOnDestroy(): void {
   }
 }

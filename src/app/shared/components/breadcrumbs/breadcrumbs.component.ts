@@ -18,7 +18,7 @@ export class BreadcrumbsComponent implements OnInit {
 
   name: string;
 
-  constructor(private router: Router,private activatedRoute:ActivatedRoute) {
+  constructor(private router: Router, private activatedRoute: ActivatedRoute) {
 
   }
 
@@ -28,19 +28,21 @@ export class BreadcrumbsComponent implements OnInit {
 
   buildBreadCrumb(route: ActivatedRoute, url: string = '',
                   breadcrumbs: Array<BreadCrumb> = []): Array<BreadCrumb> {
-    const label = route.routeConfig ? route.routeConfig.data[ 'breadcrumb' ] : 'Home';
+    const label = route.routeConfig ? route.routeConfig.data['breadcrumb'] : 'Home';
     const path = route.routeConfig ? route.routeConfig.path : '';
-
     const nextUrl = `${url}${path}/`;
+
     const breadcrumb = {
       label: label,
       url: nextUrl
     };
-    const newBreadcrumbs = [ ...breadcrumbs, breadcrumb ];
+    const newBreadcrumbs = [...breadcrumbs, breadcrumb];
     if (route.firstChild) {
       return this.buildBreadCrumb(route.firstChild, nextUrl, newBreadcrumbs);
     }
     return newBreadcrumbs;
+
+
   }
 
 }
