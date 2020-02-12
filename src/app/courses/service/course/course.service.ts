@@ -10,13 +10,15 @@ import {Observable} from "rxjs";
 export class CourseService implements OnDestroy {
 
   start: number = 0;
-  count: number;
+  count: number = 0;
+  textFragment: string;
   courses: Course[] = [];
 
   private readonly HOST = 'http://localhost:3004';
+  private readonly DEFAULT_COUNT = 5;
 
   constructor(private httpClient: HttpClient) {
-    this.count = 5;
+    this.count = this.DEFAULT_COUNT;
   }
 
   public createCourse(course: Course): Observable<Course> {
@@ -27,8 +29,12 @@ export class CourseService implements OnDestroy {
     return this.httpClient.get<Course[]>(this.HOST + "/courses?start=" + this.start + "&count=" + this.count)
   }
 
-  public searchCourses(title: string): Observable<Course[]> {
-    return this.httpClient.get<Course[]>(this.HOST + "/courses?textFragment="+title);
+  public searchCourses(textFragment: string): Observable<Course[]> {
+    this.textFragment = textFragment;
+    return this.httpClient.get<Course[]>(this.HOST +
+      "/courses?start=" + this.start +
+      "&count=" + this.count +
+      "&textFragment=" + textFragment);
   }
 
   public getCourseById(id: number): Course {
@@ -40,8 +46,11 @@ export class CourseService implements OnDestroy {
   }
 
   public loadMore(): Observable<Course[]> {
-    this.count += 5;
-    return this.httpClient.get<Course[]>(this.HOST + "/courses?start=" + this.start + "&count=" + this.count);
+    this.count += this.DEFAULT_COUNT;
+    return this.httpClient.get<Course[]>(this.HOST +
+      "/courses?start=" + this.start +
+      "&count=" + this.count +
+      "&textFragment=" + this.textFragment);
   }
 
   public updateCourse(course: Course): boolean {
@@ -54,7 +63,7 @@ export class CourseService implements OnDestroy {
     return false;
   }
 
-
   ngOnDestroy(): void {
+    this.count = 0;
   }
 }
