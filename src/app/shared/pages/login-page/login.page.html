@@ -3,15 +3,15 @@
     <article class="card-body">
       <a href="" class="float-right btn btn-outline-primary">Sign up</a>
       <h4 class="card-title mb-4 mt-1">Sign in</h4>
-      <form>
+      <form [formGroup]="loginForm" (ngSubmit)="authorization()">
         <div class="form-group">
           <label>Your login</label>
-          <input #login name="" class="form-control" placeholder="Login" type="login">
+          <input name="" class="form-control" placeholder="Login" formControlName="login" type="login">
         </div>
         <div class="form-group">
           <a class="float-right" href="#">Forgot?</a>
           <label>Your password</label>
-          <input #password class="form-control" placeholder="******" type="password">
+          <input class="form-control" placeholder="******" formControlName="password" type="password">
         </div>
         <div class="form-group">
           <div class="checkbox">
@@ -19,9 +19,15 @@
           </div>
         </div>
         <div class="form-group">
-          <button (click)="authorization()" type="submit" class="btn btn-primary btn-block">Login</button>
+          <button type="submit" class="btn btn-primary btn-block">Login</button>
         </div>
       </form>
     </article>
+    <div class="alert alert-danger" *ngIf="loginErrorBlock">
+      Login or password is incorrect.
+    </div>
+    <div class="alert alert-danger" *ngIf="showErrorBlock">
+      Data is invalid.
+    </div>
   </div>
 </aside>

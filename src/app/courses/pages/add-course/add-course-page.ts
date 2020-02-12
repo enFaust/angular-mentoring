@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {CourseService} from "../../service/course/course.service";
 import {CommonCourse} from "../../model/course/impl/common-course";
-import {FormControl, FormGroup, FormsModule, Validators} from '@angular/forms';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {Router} from "@angular/router";
 import {Title} from "@angular/platform-browser";
 

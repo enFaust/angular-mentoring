@@ -4,6 +4,7 @@ import {User} from "../../model/course/user";
 import {Router} from "@angular/router";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {BehaviorSubject, Observable, Subscription} from "rxjs";
+import {map} from "rxjs/operators";
 
 @Injectable({
   providedIn: 'root'
@@ -26,19 +27,25 @@ export class AuthService implements OnDestroy {
     return localStorage.getItem('token') != null;
   }
 
-  public login(login: String, password: String): boolean{
+  public login(login: String, password: String): Observable<boolean> {
 
-    this.httpClient.post("http://localhost:3004/auth/login", {login, password}).subscribe(data => {
-      localStorage.setItem('token', data["token"]);
-      let token = data["token"];
-      this.httpClient.post<{}>("http://localhost:3004/auth/userinfo", {token}).subscribe(
-        data => {
-          localStorage.setItem('id', data["id"]);
-          localStorage.setItem('firstName', data["name"]["first"]);
-          localStorage.setItem('lastName', data["name"]["last"]);
-        });
-    });
-    return localStorage.getItem('token') != null;
+    return this.httpClient.post("http://localhost:3004/auth/login", {login, password})
+      .pipe(map(data => {
+          let token = data["token"];
+          if (token) {
+            localStorage.setItem('token', token);
+            this.httpClient.post<{}>("http://localhost:3004/auth/userinfo", {token}).subscribe(
+              data => {
+                localStorage.setItem('id', data["id"]);
+                localStorage.setItem('firstName', data["name"]["first"]);
+                localStorage.setItem('lastName', data["name"]["last"]);
+              });
+            return true;
+          } else {
+            return false;
+          }
+        })
+      )
   }
 
   public getCurrentUser(): User {
