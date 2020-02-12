@@ -26,7 +26,7 @@ export class AuthService implements OnDestroy {
     return localStorage.getItem('token') != null;
   }
 
-  public login(login: String, password: String) {
+  public login(login: String, password: String): boolean{
 
     this.httpClient.post("http://localhost:3004/auth/login", {login, password}).subscribe(data => {
       localStorage.setItem('token', data["token"]);
@@ -38,8 +38,7 @@ export class AuthService implements OnDestroy {
           localStorage.setItem('lastName', data["name"]["last"]);
         });
     });
-
-    this.router.navigate(['/courses']);
+    return localStorage.getItem('token') != null;
   }
 
   public getCurrentUser(): User {

@@ -31,17 +31,12 @@ export class LoginPage implements OnInit {
     const login = this.login.nativeElement.value;
     const password = this.password.nativeElement.value;
 
-    this.authService.login(login, password);
-    /*.subscribe((items) => {
-        localStorage.setItem('token', items["token"]);
-        this.authService.initUser().subscribe((items) => {
-          localStorage.setItem('firstName', items["id"]);
 
-          localStorage.setItem('firstName', items["name"]["first"]);
-          localStorage.setItem('lastName', items["name"]["last"]);
-        });
+    let auth = this.authService.login(login, password);
+    console.log(auth);
+    if(auth){
       this.router.navigate(['/courses']);
-      }
-    );*/
+    };
+
   }
 }
