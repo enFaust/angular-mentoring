@@ -6,6 +6,7 @@ import {AppComponent} from './app.component';
 import {CoursesModule} from './courses/courses.module';
 import {SharedModule} from './shared/shared.module';
 import {AuthGuard} from "./auth.guard";
+import {HttpClient, HttpClientModule} from "@angular/common/http";
 
 @NgModule({
   declarations: [

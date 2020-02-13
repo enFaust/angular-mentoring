@@ -12,7 +12,6 @@ import {UserMenuComponent} from "../../components/user-menu/user-menu.component"
 import {CopyrightComponent} from "../../components/copyright/copyright.component";
 import {CoursesSearchComponent} from "../../../courses/components/courses-search/courses-search.component";
 import {CourseComponent} from "../../../courses/components/course/course.component";
-import {LoadMoreComponent} from "../../components/load-more/load-more.component";
 import {OrderByPipe} from "../../pipes/order-by/order-by.pipe";
 import {DurationConverterPipe} from "../../pipes/duration/duration-converter.pipe";
 import {ChangePlateBorderDirective} from "../../derictives/change-plate-border.directive";
@@ -36,7 +35,6 @@ describe('WrapperPage', () => {
         CopyrightComponent,
         CoursesSearchComponent,
         CourseComponent,
-        LoadMoreComponent,
         OrderByPipe,
         DurationConverterPipe,
         ChangePlateBorderDirective

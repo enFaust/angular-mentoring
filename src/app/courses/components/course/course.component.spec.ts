@@ -21,7 +21,7 @@ describe('CourseComponent', () => {
     fixture = TestBed.createComponent(CourseComponent);
     component = fixture.componentInstance;
 
-    component.course = new CommonCourse(1, 'Video Course 1. Name tag', new Date(2020, 0, 15), 120,
+    component.course = new CommonCourse(1, 'Video Course 1. IName tag', new Date(2020, 0, 15), 120,
       'Learn about where you can find course descriptions, what information they include, how they work, ' +
       'and details about various components of a course description. Course descriptions report information about a ' +
       'university or college\'s classes. They\'re published both in course catalogs that outline degree requirements and' +
@@ -48,8 +48,8 @@ describe('CourseComponent', () => {
     expect(cartTitle.textContent).toContain('1');
   });
 
-  it('course title expect', () => {
-    const cartTitle = fixture.debugElement.query(By.css('.card-title')).nativeElement;
+  it('course name expect', () => {
+    const cartTitle = fixture.debugElement.query(By.css('.card-name')).nativeElement;
     expect(cartTitle.textContent).toContain('VIDEO COURSE 1. NAME TAG');
   });
 
@@ -58,8 +58,8 @@ describe('CourseComponent', () => {
     expect(cartTitle.textContent).toContain('15 Jan 2020');
   });
 
-  it('course duration expect', () => {
-    const cartTitle = fixture.debugElement.query(By.css('.duration')).nativeElement;
+  it('course length expect', () => {
+    const cartTitle = fixture.debugElement.query(By.css('.length')).nativeElement;
     expect(cartTitle.textContent).toContain('2h');
   });
 

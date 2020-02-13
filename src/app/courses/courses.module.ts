@@ -5,7 +5,6 @@ import {CoursesComponent} from './pages/courses/courses.component';
 import {CourseComponent} from './components/course/course.component';
 import {CoursesSearchComponent} from './components/courses-search/courses-search.component';
 import {AppRoutingModule} from '../app-routing.module';
-import {LoadMoreComponent} from "../shared/components/load-more/load-more.component";
 import {DurationConverterPipe} from "../shared/pipes/duration/duration-converter.pipe";
 import {OrderByPipe} from "../shared/pipes/order-by/order-by.pipe";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
@@ -14,7 +13,7 @@ import { CoursePageComponent } from './pages/course-page/course-page.component';
 
 
 @NgModule({
-  declarations: [CoursesComponent, CourseComponent, CoursesSearchComponent, LoadMoreComponent, DurationConverterPipe, OrderByPipe, AddCoursePage, CoursePageComponent],
+  declarations: [CoursesComponent, CourseComponent, CoursesSearchComponent, DurationConverterPipe, OrderByPipe, AddCoursePage, CoursePageComponent],
   imports: [
     CommonModule,
     AppRoutingModule,

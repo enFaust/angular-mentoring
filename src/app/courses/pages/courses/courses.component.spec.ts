@@ -3,7 +3,6 @@ import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 import {CoursesComponent} from './courses.component';
 import {CoursesSearchComponent} from '../../components/courses-search/courses-search.component';
 import {CourseComponent} from '../../components/course/course.component';
-import {LoadMoreComponent} from '../../../shared/components/load-more/load-more.component';
 import {OrderByPipe} from "../../../shared/pipes/order-by/order-by.pipe";
 import {DurationConverterPipe} from "../../../shared/pipes/duration/duration-converter.pipe";
 import {ChangePlateBorderDirective} from "../../../shared/derictives/change-plate-border.directive";
@@ -18,7 +17,6 @@ describe('CoursesComponent', () => {
         CoursesComponent,
         CoursesSearchComponent,
         CourseComponent,
-        LoadMoreComponent,
         OrderByPipe,
         DurationConverterPipe,
         ChangePlateBorderDirective

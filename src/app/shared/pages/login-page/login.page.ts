@@ -1,6 +1,8 @@
-import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {AuthService} from "../../service/auth/auth.service";
 import {Title} from "@angular/platform-browser";
+import {Router} from "@angular/router";
+import {FormControl, FormGroup, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-login',
@@ -9,17 +11,25 @@ import {Title} from "@angular/platform-browser";
 })
 export class LoginPage implements OnInit {
 
-  public static TITLE: string = "Login page";
+  static TITLE: string = "Login page";
 
-  // @ts-ignore
-  @ViewChild('login')
-  private login: ElementRef;
+  loginErrorBlock = false;
+  showErrorBlock = false;
 
-  // @ts-ignore
-  @ViewChild("password")
-  private password: ElementRef;
+  loginForm: FormGroup = new FormGroup({
+    "login": new FormControl('', [
+      Validators.required,
+      Validators.maxLength(40),
+      Validators.minLength(3)
+    ]),
+    "password": new FormControl('', [
+      Validators.required,
+      Validators.maxLength(40),
+      Validators.minLength(3)
+    ])
+  });
 
-  constructor(private authService: AuthService, private titleService: Title) {
+  constructor(private authService: AuthService, private titleService: Title, public router: Router) {
   }
 
   ngOnInit(): void {
@@ -27,10 +37,20 @@ export class LoginPage implements OnInit {
   }
 
   public authorization() {
-    const login = this.login.nativeElement.value;
-    const password = this.password.nativeElement.value;
+    if (this.loginForm.valid) {
+      const login = this.loginForm.controls['login'].value;
+      const password = this.loginForm.controls['password'].value;
 
-    this.authService.login(login, password);
+      this.authService.login(login, password).subscribe(resp => {
+        if (resp) {
+          this.router.navigate(['/courses']);
+        }
+      }, (error => {
+        console.log(error['error']);
+        this.loginErrorBlock = true;
+      }));
+    } else {
+      this.showErrorBlock = true;
+    }
   }
-
 }

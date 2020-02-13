@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {CourseService} from "../../service/course/course.service";
 import {CommonCourse} from "../../model/course/impl/common-course";
-import {FormControl, FormGroup, FormsModule, Validators} from '@angular/forms';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {Router} from "@angular/router";
 import {Title} from "@angular/platform-browser";
 
@@ -38,12 +38,12 @@ export class AddCoursePage implements OnInit {
 
   public save() {
     if (this.addCourseForm.valid) {
-      let title = this.addCourseForm.controls['title'].value;
+      let title = this.addCourseForm.controls['name'].value;
       let date = this.addCourseForm.controls['date'].value;
-      let duration = this.addCourseForm.controls['duration'].value;
+      let duration = this.addCourseForm.controls['length'].value;
       let description = this.addCourseForm.controls['description'].value;
 
-      this.coursesService.createCourse(new CommonCourse(0, title, new Date(date), duration, description, false));
+      this.coursesService.createCourse(new CommonCourse(0, title, new Date(date), duration, description, false)).subscribe();
       this.router.navigate(['/courses']);
     } else {
       this.showErrorBlock = true;

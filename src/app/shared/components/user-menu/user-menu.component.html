@@ -3,6 +3,6 @@
 </div>
 
 <div *ngIf="isAuth()">
-  <span class="text-capitalize text-light">{{userFirstName}} {{userSecondName}}</span>
+  <span *ngIf="user != null" class="text-capitalize text-light">{{user.name.first}} {{user.name.last}}</span>
   <button class="btn btn-outline-light my-2 my-sm-0" (click)="logout()" >Log out</button>
 </div>

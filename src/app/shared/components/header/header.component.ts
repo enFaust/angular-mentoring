@@ -1,5 +1,5 @@
 import {Component, DoCheck, OnChanges, OnInit, SimpleChanges} from '@angular/core';
-import {User} from '../../model/course/user';
+import {IUser} from '../../model/course/IUser';
 import {AuthService} from "../../service/auth/auth.service";
 
 @Component({

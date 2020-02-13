@@ -3,18 +3,27 @@ import {Course} from '../course';
 export class CommonCourse implements Course {
 
   public id: number;
-  public title: string;
-  public creationDate: Date;
-  public duration: number;
+  public name: string;
+  public date: Date;
+  public length: number;
   public description: string;
-  public topRated: boolean;
+  public isTopRated: boolean;
 
-  constructor(id: number, title: string, creationDate: Date, duration: number, description: string, topRated: boolean) {
+  constructor(id: number, name: string, date: Date, length: number, description: string, isTopRated: boolean) {
     this.id = id;
-    this.title = title;
-    this.creationDate = creationDate;
-    this.duration = duration;
+    this.name = name;
+    this.date = date;
+    this.length = length;
     this.description = description;
-    this.topRated = topRated;
+    this.isTopRated = isTopRated;
+  }
+
+  toString(): string {
+    return 'id: ' + this.id +
+      ', name: ' + this.name +
+      ', date: ' + this.date +
+      ', length: ' + this.length +
+      ', description: ' + this.description +
+      ', isTopRated: ' + this.isTopRated;
   }
 }

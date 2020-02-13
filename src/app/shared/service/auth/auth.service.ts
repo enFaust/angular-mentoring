@@ -1,42 +1,62 @@
-import {Injectable} from '@angular/core';
+import {Injectable, OnDestroy} from '@angular/core';
 import {AuthorizedUser} from "../../model/course/impl/authorized-user";
-import {User} from "../../model/course/user";
+import {IUser} from "../../model/course/IUser";
 import {Router} from "@angular/router";
+import {HttpClient, HttpHeaders} from "@angular/common/http";
+import {BehaviorSubject, Observable, Subscription} from "rxjs";
+import {map} from "rxjs/operators";
 
 @Injectable({
   providedIn: 'root'
 })
-export class AuthService {
+export class AuthService implements OnDestroy {
 
-  private auth: boolean = false;
+  token: string;
+  private currentUserSubject: BehaviorSubject<IUser>;
+  public currentUser: Observable<IUser>;
+  header: HttpHeaders;
 
-  constructor(public router: Router) {
+  constructor(public router: Router, private httpClient: HttpClient) {
+    this.currentUserSubject = new BehaviorSubject<IUser>(JSON.parse(localStorage.getItem('currentUser')));
+    this.currentUser = this.currentUserSubject.asObservable();
   }
 
-  public isAuthorized(){
-    let userId = localStorage.getItem('userId');
-
-    return userId != null;
+  public isAuthorized() {
+    return localStorage.getItem('token') != null;
   }
 
-  public login(login: String, password: String): void {
-    let user = new AuthorizedUser(1, 'Alex', 'Nikolson', 'user', 'user');
+  public login(login: String, password: String): Observable<boolean> {
 
-    if (login === user.login && password === user.password) {
-      this.auth = true;
-      localStorage.setItem('userId', user.id.toString());
-      localStorage.setItem('userFirstName', user.firstName);
-      localStorage.setItem('userLastName', user.lastName);
-      this.router.navigate(['/courses']);
-    }
+    return this.httpClient.post("http://localhost:3004/auth/login", {login, password})
+      .pipe(map(data => {
+          let token = data["token"];
+          if (token) {
+            localStorage.setItem('token', token);
+            this.httpClient.post<IUser>("http://localhost:3004/auth/userinfo", {token}).subscribe(
+              data => {
+                localStorage.setItem('currentUser', JSON.stringify(data));
+                this.currentUserSubject.next(data);
+              });
+            return true;
+          } else {
+            return false;
+          }
+        })
+      )
+  }
+
+  public getCurrentUser(): Observable<IUser> {
+    return this.currentUser;
   }
 
   public logout() {
-    this.auth = false;
-
-    localStorage.removeItem('userId');
-    localStorage.removeItem('userFirstName');
-    localStorage.removeItem('userLastName');
+    localStorage.removeItem('id');
+    localStorage.removeItem('token');
+    localStorage.removeItem('firstName');
+    localStorage.removeItem('lastName');
     this.router.navigate(['/login']);
+  }
+
+  ngOnDestroy() {
   }
 }

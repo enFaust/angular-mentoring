@@ -12,6 +12,8 @@ import {RouterModule} from "@angular/router";
 import {ChangePlateBorderDirective} from './derictives/change-plate-border.directive';
 import {LoginPage} from './pages/login-page/login.page';
 import {BreadcrumbModule} from "primeng";
+import {HttpClient, HttpClientModule} from "@angular/common/http";
+import {ReactiveFormsModule} from "@angular/forms";
 
 
 @NgModule({
@@ -39,7 +41,8 @@ import {BreadcrumbModule} from "primeng";
     CommonModule,
     RouterModule,
     BreadcrumbModule,
-    BreadcrumbModule,
+    HttpClientModule,
+    ReactiveFormsModule
   ],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA,
