@@ -1,7 +1,6 @@
 import {Component, EventEmitter, Output} from '@angular/core';
-import {User} from "../../model/course/user";
+import {IUser} from "../../model/course/IUser";
 import {AuthService} from "../../service/auth/auth.service";
-import {AuthorizedUser} from "../../model/course/impl/authorized-user";
 
 @Component({
   selector: 'app-user-menu',
@@ -10,13 +9,16 @@ import {AuthorizedUser} from "../../model/course/impl/authorized-user";
 })
 export class UserMenuComponent  {
 
-  user: User;
+  user: IUser;
 
   @Output()
   public logOut: EventEmitter<string> = new EventEmitter<string>();
 
   constructor(private authService: AuthService) {
-    this.user = this.authService.getCurrentUser();
+    this.authService.getCurrentUser().subscribe(data => {
+      console.log(data);
+      this.user = data;
+    });
   }
 
   public isAuth(): boolean {

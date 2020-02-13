@@ -1,6 +1,6 @@
 import {Injectable, OnDestroy} from '@angular/core';
 import {AuthorizedUser} from "../../model/course/impl/authorized-user";
-import {User} from "../../model/course/user";
+import {IUser} from "../../model/course/IUser";
 import {Router} from "@angular/router";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {BehaviorSubject, Observable, Subscription} from "rxjs";
@@ -12,15 +12,13 @@ import {map} from "rxjs/operators";
 export class AuthService implements OnDestroy {
 
   token: string;
-  loginSubs: Subscription;
+  private currentUserSubject: BehaviorSubject<IUser>;
+  public currentUser: Observable<IUser>;
   header: HttpHeaders;
-  currentUser: User;
 
   constructor(public router: Router, private httpClient: HttpClient) {
-    let id = localStorage.getItem('id');
-    let firstName = localStorage.getItem('firstName');
-    let lastName = localStorage.getItem('lastName');
-    this.currentUser = new AuthorizedUser(Number(id), firstName, lastName);
+    this.currentUserSubject = new BehaviorSubject<IUser>(JSON.parse(localStorage.getItem('currentUser')));
+    this.currentUser = this.currentUserSubject.asObservable();
   }
 
   public isAuthorized() {
@@ -34,11 +32,10 @@ export class AuthService implements OnDestroy {
           let token = data["token"];
           if (token) {
             localStorage.setItem('token', token);
-            this.httpClient.post<{}>("http://localhost:3004/auth/userinfo", {token}).subscribe(
+            this.httpClient.post<IUser>("http://localhost:3004/auth/userinfo", {token}).subscribe(
               data => {
-                localStorage.setItem('id', data["id"]);
-                localStorage.setItem('firstName', data["name"]["first"]);
-                localStorage.setItem('lastName', data["name"]["last"]);
+                localStorage.setItem('currentUser', JSON.stringify(data));
+                this.currentUserSubject.next(data);
               });
             return true;
           } else {
@@ -48,7 +45,7 @@ export class AuthService implements OnDestroy {
       )
   }
 
-  public getCurrentUser(): User {
+  public getCurrentUser(): Observable<IUser> {
     return this.currentUser;
   }
 
@@ -61,6 +58,5 @@ export class AuthService implements OnDestroy {
   }
 
   ngOnDestroy() {
-    this.loginSubs.unsubscribe();
   }
 }

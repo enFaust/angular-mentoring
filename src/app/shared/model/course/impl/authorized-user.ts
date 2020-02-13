@@ -1,15 +1,13 @@
-import {User} from "../user";
+import {IUser} from "../IUser";
+import {IName} from "../IName";
 
-export class AuthorizedUser implements User {
+export class AuthorizedUser implements IUser {
   id: number;
-  firstName: string;
-  lastName: string;
+  name: IName;
   login: string;
   password: string;
 
-  constructor(id: number, firstName: string, lastName: string) {
-    this.id = id;
-    this.firstName = firstName;
-    this.lastName = lastName;
+
+  constructor() {
   }
 }
