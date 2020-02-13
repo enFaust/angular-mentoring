@@ -1,6 +1,5 @@
 import {Injectable, OnDestroy} from '@angular/core';
 import {Course} from "../../model/course/course";
-import {CommonCourse} from "../../model/course/impl/common-course";
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 
@@ -25,6 +24,7 @@ export class CourseService implements OnDestroy {
     return this.httpClient.post<Course>(this.HOST + '/courses', course);
   }
 
+
   public getCourses(): Observable<Course[]> {
     return this.httpClient.get<Course[]>(this.HOST + "/courses?start=" + this.start + "&count=" + this.count)
   }
@@ -37,8 +37,8 @@ export class CourseService implements OnDestroy {
       "&textFragment=" + textFragment);
   }
 
-  public getCourseById(id: number): Course {
-    return this.courses.find(item => item.id == id);
+  public getCourseById(id: number):  Observable<Course> {
+    return this.httpClient.get<Course>(this.HOST + "/courses/" + id);
   }
 
   public removeCourse(id: number): Observable<{}> {

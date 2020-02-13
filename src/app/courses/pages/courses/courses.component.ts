@@ -36,7 +36,6 @@ export class CoursesComponent implements OnInit {
   }
 
   public search(searchWord: string): void {
-
     this.coursesService.searchCourses(searchWord).subscribe(
       items => {
           this.courses = items;
