@@ -22,9 +22,9 @@ describe('ChangePlateBorderDirective', () => {
 
     component.course = new CommonCourse(1, 'Video Course 1. IName tag', new Date(), 120,
       'Learn about where you can find course descriptions, what information they include, how they work, ' +
-      'and details about various components of a course description. Course descriptions report information about a ' +
+      'and details about various components of coursesObservable course description. Course descriptions report information about coursesObservable ' +
       'university or college\'s classes. They\'re published both in course catalogs that outline degree requirements and' +
-      ' in course schedules that contain descriptions for all courses offered during a particular semester.', true);
+      ' in course schedules that contain descriptions for all courses offered during coursesObservable particular semester.', true);
 
     fixture.detectChanges();
   });

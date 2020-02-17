@@ -12,12 +12,13 @@
         <h4>No data. Feel free to add new course.</h4>
       </div>
   </div>
+  <app-spinner *ngIf="routerChanged"></app-spinner>
   <div class="load-more-component">
     <div class="card my-3">
       <div class="card-body text-center">
-        <a class="text-uppercase card-link mx-auto" (click)="loadMore()" >LOAD MORE</a>
+        <a class="text-uppercase card-link mx-auto" (click)="loadMore()">LOAD MORE</a>
       </div>
     </div>
   </div>
-
 </div>
+

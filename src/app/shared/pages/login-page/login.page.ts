@@ -15,6 +15,7 @@ export class LoginPage implements OnInit {
 
   loginErrorBlock = false;
   showErrorBlock = false;
+  routerChanged = false;
 
   loginForm: FormGroup = new FormGroup({
     "login": new FormControl('', [
@@ -38,19 +39,23 @@ export class LoginPage implements OnInit {
 
   public authorization() {
     if (this.loginForm.valid) {
+      this.routerChanged = true;
       const login = this.loginForm.controls['login'].value;
       const password = this.loginForm.controls['password'].value;
 
       this.authService.login(login, password).subscribe(resp => {
         if (resp) {
+          this.routerChanged = false;
           this.router.navigate(['/courses']);
         }
       }, (error => {
         console.log(error['error']);
         this.loginErrorBlock = true;
+        this.routerChanged = false;
       }));
     } else {
       this.showErrorBlock = true;
+      this.routerChanged = false;
     }
   }
 }

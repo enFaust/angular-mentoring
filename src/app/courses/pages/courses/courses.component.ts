@@ -2,6 +2,8 @@ import {Component, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {CourseService} from '../../service/course/course.service';
 import {Course} from '../../model/course/course';
 import {Title} from "@angular/platform-browser";
+import {interval, observable, Observable, Subject} from "rxjs";
+import {debounce, debounceTime} from "rxjs/operators";
 
 @Component({
   selector: 'app-courses',
@@ -12,50 +14,58 @@ export class CoursesComponent implements OnInit {
 
   public static TITLE: string = "Add new course";
 
+  private coursesSubject: Subject<Course[]> = new Subject<Course[]>();
+  private coursesObservable: Observable<Course[]> = this.coursesSubject.asObservable()
+
   courses: Course[];
+  routerChanged = false;
 
   constructor(private coursesService: CourseService, private titleService: Title) {
+    this.routerChanged = true;
+    titleService.setTitle(CoursesComponent.TITLE);
+    this.updatePage();
   }
 
   ngOnInit(): void {
-    this.updatePage();
-    this.titleService.setTitle(CoursesComponent.TITLE);
+    this.coursesObservable.subscribe(
+      observable => {
+        this.courses = observable;
+      }
+    );
   }
 
   public onDelete(id: number): void {
+    this.routerChanged = true;
     if (confirm('Do you really want to delete this course?')) {
-      this.coursesService.removeCourse(id).subscribe();
-      this.updatePage();
+      this.coursesService.removeCourse(id).subscribe(observable => this.routerChanged = false
+      );
     }
   }
 
   public loadMore() {
-    this.coursesService.loadMore().subscribe(items => {
-      this.courses = items;
-    });
-  }
-
-  public search(searchWord: string): void {
-    this.coursesService.searchCourses(searchWord).subscribe(
-      items => {
-          this.courses = items;
+    this.routerChanged = true;
+    this.coursesService.loadMore()
+      .subscribe(courses => {
+        this.coursesSubject.next(courses);
+        this.routerChanged = false;
       });
   }
 
-  public updatePage() {
-    this.coursesService.getCourses().subscribe(items => {
-      this.courses = items;
-    });
+  public search(textSearch: string): void {
+    this.routerChanged = true;
+    this.coursesService.searchCourses(textSearch)
+      .subscribe(
+        courses => {
+          this.coursesSubject.next(courses);
+          this.routerChanged = false;
+        });
   }
 
-  private orderByTitleComparator(v1: Course, v2: Course) {
-    if (v1.name === v2.name) {
-      return 0;
-    }
-    if (v1.name > v2.name) {
-      return 1;
-    }
-    return -1;
+  public updatePage() {
+    this.coursesService.getCourses().subscribe(courses => {
+      this.coursesSubject.next(courses);
+      this.routerChanged = false;
+    });
   }
 
 }

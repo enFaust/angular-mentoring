@@ -1,4 +1,7 @@
-import {Component, ElementRef, EventEmitter, Output, ViewChild} from '@angular/core';
+import {Component, EventEmitter, OnDestroy, OnInit, Output} from '@angular/core';
+import {Observable, Subject} from "rxjs";
+import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {debounceTime, distinctUntilChanged, filter} from "rxjs/operators";
 
 
 @Component({
@@ -6,18 +9,37 @@ import {Component, ElementRef, EventEmitter, Output, ViewChild} from '@angular/c
   templateUrl: './courses-search.component.html',
   styleUrls: ['./courses-search.component.css']
 })
-export class CoursesSearchComponent   {
+export class CoursesSearchComponent implements OnInit, OnDestroy {
 
-  // @ts-ignore
-  @ViewChild('searchText')
-  private searchText: ElementRef;
+  private  searchSubject: Subject<string> = new Subject<string>();
+  searchObservable: Observable<string> = this.searchSubject.asObservable().pipe(debounceTime(250));
+
+  searchForm: FormGroup = new FormGroup({
+    "textFragment": new FormControl("", [
+      Validators.required,
+      Validators.maxLength(40),
+      Validators.minLength(3)
+    ])
+  });
+
+  ngOnInit(): void {
+    this.searchObservable.subscribe(textFragment => this.finder.emit(textFragment));
+  }
 
   @Output()
   private finder: EventEmitter<string> = new EventEmitter<string>();
 
-  constructor() { }
+  constructor() {
+  }
 
   public searchByTitle(): void {
-    this.finder.emit(this.searchText.nativeElement.value);
+    if (this.searchForm.valid) {
+      let textFragment = this.searchForm.controls['textFragment'].value;
+      this.searchSubject.next(textFragment);
+    }
+  }
+
+  ngOnDestroy(): void {
+    this.searchSubject.unsubscribe();
   }
 }

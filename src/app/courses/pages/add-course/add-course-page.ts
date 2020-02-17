@@ -4,6 +4,7 @@ import {CommonCourse} from "../../model/course/impl/common-course";
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {Router} from "@angular/router";
 import {Title} from "@angular/platform-browser";
+import {observable} from "rxjs";
 
 @Component({
   selector: 'app-add-course',
@@ -14,6 +15,7 @@ export class AddCoursePage implements OnInit {
 
   public static TITLE: string = "Add new course";
   showErrorBlock = false;
+  routerChanged = false;
 
   addCourseForm: FormGroup = new FormGroup({
     "title": new FormControl('', [Validators.required, Validators.maxLength(40)]),
@@ -22,7 +24,7 @@ export class AddCoursePage implements OnInit {
     "duration": new FormControl('', [Validators.required, Validators.pattern('[0-9]*')]),
   });
 
-  constructor(private coursesService: CourseService, private router: Router,  private titleService: Title) {
+  constructor(private coursesService: CourseService, private router: Router, private titleService: Title) {
   }
 
   ngOnInit() {
@@ -38,16 +40,22 @@ export class AddCoursePage implements OnInit {
 
   public save() {
     if (this.addCourseForm.valid) {
+      this.routerChanged = true;
       let title = this.addCourseForm.controls['name'].value;
       let date = this.addCourseForm.controls['date'].value;
       let duration = this.addCourseForm.controls['length'].value;
       let description = this.addCourseForm.controls['description'].value;
 
-      this.coursesService.createCourse(new CommonCourse(0, title, new Date(date), duration, description, false)).subscribe();
+      this.coursesService.createCourse(new CommonCourse(0, title, new Date(date), duration, description, false)).subscribe(observable =>
+      {
+        this.routerChanged = false;
+      });
       this.router.navigate(['/courses']);
     } else {
       this.showErrorBlock = true;
+      this.routerChanged = false;
     }
+
   }
 
 }
