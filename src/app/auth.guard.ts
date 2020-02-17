@@ -6,16 +6,12 @@ import {
   RouterStateSnapshot,
   UrlTree
 } from "@angular/router";
-import {Observable, Subject} from "rxjs";
-import {of} from 'rxjs';
+import {Observable, of} from "rxjs";
 import {AuthService} from "./shared/service/auth/auth.service";
 import {Injectable} from "@angular/core";
 
 @Injectable()
 export class AuthGuard implements CanActivate, CanActivateChild {
-
-  private subject: Subject<boolean> = new Subject<boolean>();
-  private observable: Observable<boolean> = this.subject.asObservable()
 
   constructor(private router: Router, private authService: AuthService) {
   }
