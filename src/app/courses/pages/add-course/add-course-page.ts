@@ -4,7 +4,6 @@ import {CommonCourse} from "../../model/course/impl/common-course";
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {Router} from "@angular/router";
 import {Title} from "@angular/platform-browser";
-import {observable} from "rxjs";
 
 @Component({
   selector: 'app-add-course',

@@ -6,15 +6,18 @@ import {
   RouterStateSnapshot,
   UrlTree
 } from "@angular/router";
-import {Observable} from "rxjs";
+import {Observable, Subject} from "rxjs";
+import {of} from 'rxjs';
 import {AuthService} from "./shared/service/auth/auth.service";
 import {Injectable} from "@angular/core";
-import {HttpClient, HttpHeaders} from "@angular/common/http";
 
 @Injectable()
 export class AuthGuard implements CanActivate, CanActivateChild {
 
-  constructor(private router: Router, private authService: AuthService, private httpClient: HttpClient) {
+  private subject: Subject<boolean> = new Subject<boolean>();
+  private observable: Observable<boolean> = this.subject.asObservable()
+
+  constructor(private router: Router, private authService: AuthService) {
   }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> | boolean {
@@ -25,12 +28,13 @@ export class AuthGuard implements CanActivate, CanActivateChild {
     return this.authorizedChecker();
   }
 
-  private authorizedChecker() {
+  private authorizedChecker(): Observable<boolean> {
     if (this.authService.isAuthorized()) {
-      return true;
+      return of(true);
     } else {
       this.router.navigate(['/login']);
-      return false;
+      return of(false);
     }
+
   }
 }
