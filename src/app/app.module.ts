@@ -10,7 +10,7 @@ import {StoreModule} from "@ngrx/store";
 import {EffectsModule} from "@ngrx/effects";
 import {AuthEffects} from "./shared/store/effects/auth";
 import {courseReducer} from "./courses/store/reducers/courses";
-import { CoursesEffects } from './courses/store/effects/courses';
+import {CoursesEffects} from "./courses/store/effects/courses";
 
 @NgModule({
   declarations: [
