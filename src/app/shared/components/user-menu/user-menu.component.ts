@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Output} from '@angular/core';
-import {IUser} from "../../model/course/IUser";
+import {IUser} from "../../model/user/IUser";
 import {AuthService} from "../../service/auth/auth.service";
 
 @Component({

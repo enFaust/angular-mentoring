@@ -6,7 +6,10 @@ import {AppComponent} from './app.component';
 import {CoursesModule} from './courses/courses.module';
 import {SharedModule} from './shared/shared.module';
 import {AuthGuard} from "./auth.guard";
-import {HttpClient, HttpClientModule} from "@angular/common/http";
+import {StoreModule} from "@ngrx/store";
+import {EffectsModule} from "@ngrx/effects";
+import {AuthEffects} from "./shared/store/effects/auth";
+import {courseReducer} from "./courses/store/reducers/courses";
 
 @NgModule({
   declarations: [
@@ -16,10 +19,13 @@ import {HttpClient, HttpClientModule} from "@angular/common/http";
     BrowserModule,
     AppRoutingModule,
     CoursesModule,
-    SharedModule
+    SharedModule,
+    EffectsModule.forRoot([AuthEffects]),
+    StoreModule.forRoot({courses: courseReducer}),
   ],
   providers: [AuthGuard],
   bootstrap: [AppComponent],
-  schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
-export class AppModule { }
+export class AppModule {
+}

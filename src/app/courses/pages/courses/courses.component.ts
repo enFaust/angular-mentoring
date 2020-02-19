@@ -4,6 +4,10 @@ import {Course} from '../../model/course/course';
 import {Title} from "@angular/platform-browser";
 import {interval, observable, Observable, Subject} from "rxjs";
 import {debounce, debounceTime} from "rxjs/operators";
+import {Store} from "@ngrx/store";
+import {AppState} from "../../../store/state/app.state";
+import {ICourseState} from "../../store/states/courses/courses";
+import {ECoursesActions, GetCourses} from "../../store/actions/courses";
 
 @Component({
   selector: 'app-courses',
@@ -20,7 +24,7 @@ export class CoursesComponent implements OnInit {
   courses: Course[];
   routerChanged = false;
 
-  constructor(private coursesService: CourseService, private titleService: Title) {
+  constructor(private coursesService: CourseService, private titleService: Title, private store: Store<ICourseState>) {
     this.routerChanged = true;
     titleService.setTitle(CoursesComponent.TITLE);
     this.updatePage();
@@ -62,10 +66,7 @@ export class CoursesComponent implements OnInit {
   }
 
   public updatePage() {
-    this.coursesService.getCourses().subscribe(courses => {
-      this.coursesSubject.next(courses);
-      this.routerChanged = false;
-    });
+    this.store.dispatch(new GetCourses());
   }
 
 }

@@ -1,6 +1,6 @@
 import {Injectable, OnDestroy} from '@angular/core';
-import {AuthorizedUser} from "../../model/course/impl/authorized-user";
-import {IUser} from "../../model/course/IUser";
+import {AuthorizedUser} from "../../model/user/impl/authorized-user";
+import {IUser} from "../../model/user/IUser";
 import {Router} from "@angular/router";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {BehaviorSubject, Observable, Subscription} from "rxjs";
