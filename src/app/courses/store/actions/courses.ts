@@ -6,6 +6,7 @@ export const enum ECoursesActions {
   ADD_COURSE_SUCCESS = '[Course component] Add Course sSuccess',
   ADD_COURSE_FAIL = '[Course component] Add Course Fail',
   GET_COURSES = '[Course component] Get Courses',
+  GET_COURSES_SUCCESS = '[Course component] Get Courses Success',
   GET_COURSE_SUCCESS = '[Course component] Get Course sSuccess',
   GET_COURSE_FAIL = '[Course component] Get Course Fail',
   REMOVE_COURSE = '[Course component] Remove Course',
@@ -21,8 +22,15 @@ export const enum ECoursesActions {
 export class GetCourses implements Action {
   readonly type = ECoursesActions.GET_COURSES;
 
-  constructor() {
+  constructor(public payload: any = null) {
   }
+}
+
+
+export class GetCoursesSuccess implements Action {
+  readonly type = ECoursesActions.GET_COURSES_SUCCESS;
+
+  constructor(public payload?: any) {}
 }
 
 export class GetCourseSuccess implements Action {
@@ -90,12 +98,13 @@ export class RemoveCourseFail implements Action {
 }
 
 export type CourseActions =
-  AddCourse
+  | AddCourse
   | AddCourseSuccess
   | AddCourseFail
   | RemoveCourse
   | RemoveCourseSuccess
   | RemoveCourseFail
   | GetCourses
+  | GetCoursesSuccess
   | GetCourseSuccess
   | GetCourseFail;

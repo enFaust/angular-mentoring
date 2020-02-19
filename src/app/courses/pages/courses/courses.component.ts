@@ -1,41 +1,45 @@
-import {Component, OnChanges, OnInit, SimpleChanges} from '@angular/core';
+import {Component, OnChanges, OnInit, SimpleChanges, OnDestroy} from '@angular/core';
 import {CourseService} from '../../service/course/course.service';
 import {Course} from '../../model/course/course';
 import {Title} from "@angular/platform-browser";
-import {interval, observable, Observable, Subject} from "rxjs";
+import {interval, observable, Observable, Subject, Subscription} from "rxjs";
 import {debounce, debounceTime} from "rxjs/operators";
 import {Store} from "@ngrx/store";
 import {AppState} from "../../../store/state/app.state";
 import {ICourseState} from "../../store/states/courses/courses";
 import {ECoursesActions, GetCourses} from "../../store/actions/courses";
+import { getCourses } from '../../store/reducers/courses';
 
 @Component({
   selector: 'app-courses',
   templateUrl: './courses.component.html',
   styleUrls: ['./courses.component.css']
 })
-export class CoursesComponent implements OnInit {
+export class CoursesComponent implements OnInit, OnDestroy {
 
   public static TITLE: string = "Add new course";
 
-  private coursesSubject: Subject<Course[]> = new Subject<Course[]>();
-  private coursesObservable: Observable<Course[]> = this.coursesSubject.asObservable()
+  // private coursesSubject: Subject<Course[]> = new Subject<Course[]>();
+  // private coursesObservable: Observable<Course[]> = this.coursesSubject.asObservable()
+  // courses$: Observable<Course[]> = this.store.select(state => state.courses);
 
-  courses: Course[];
+  courses: Course[] = [];
+  courses$: Subscription;
   routerChanged = false;
 
   constructor(private coursesService: CourseService, private titleService: Title, private store: Store<ICourseState>) {
-    this.routerChanged = true;
-    titleService.setTitle(CoursesComponent.TITLE);
-    this.updatePage();
   }
 
   ngOnInit(): void {
-    this.coursesObservable.subscribe(
-      observable => {
-        this.courses = observable;
-      }
-    );
+    this.routerChanged = true;
+    this.titleService.setTitle(CoursesComponent.TITLE);
+
+    this.store.dispatch(new GetCourses());
+
+
+    this.courses$ = this.store.select(getCourses).subscribe(data => {
+      this.courses = data.courses;
+    });
   }
 
   public onDelete(id: number): void {
@@ -50,7 +54,7 @@ export class CoursesComponent implements OnInit {
     this.routerChanged = true;
     this.coursesService.loadMore()
       .subscribe(courses => {
-        this.coursesSubject.next(courses);
+        // this.coursesSubject.next(courses);
         this.routerChanged = false;
       });
   }
@@ -60,13 +64,19 @@ export class CoursesComponent implements OnInit {
     this.coursesService.searchCourses(textSearch)
       .subscribe(
         courses => {
-          this.coursesSubject.next(courses);
+          // this.coursesSubject.next(courses);
           this.routerChanged = false;
         });
   }
 
-  public updatePage() {
-    this.store.dispatch(new GetCourses());
+  ngOnDestroy() {
+    if (this.courses$) {
+      this.courses$.unsubscribe();
+    }
   }
+
+  // public updatePage() {
+  //   this.store.dispatch(new GetCourses());
+  // }
 
 }

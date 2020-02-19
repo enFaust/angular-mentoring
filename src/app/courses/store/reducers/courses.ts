@@ -1,4 +1,5 @@
 import {Course} from "../../model/course/course";
+import { createSelector } from '@ngrx/store';
 import {ICourseState, initialCourseState} from "../states/courses/courses";
 import {CourseActions, ECoursesActions} from "../actions/courses";
 import {IAuthState, initialAuthState} from "../../../shared/store/states/user/auth";
@@ -27,12 +28,10 @@ export const authReducers = (
   }
 };
 
-export const courseReducer = (
-  state = initialCourseState,
-  action: CourseActions
-): ICourseState =>
-{
-  switch (action.type) {
+export function courseReducer( state = initialCourseState, action: CourseActions ): ICourseState {
+  const { type, payload } = action;
+
+  switch (type) {
     case ECoursesActions.ADD_COURSE: {
 
     }
@@ -40,7 +39,13 @@ export const courseReducer = (
       const course = action.payload;
     }
     case ECoursesActions.GET_COURSES: {
-      console.log(action)
+    }
+    case ECoursesActions.GET_COURSES_SUCCESS: {
+      console.warn(payload)
+      return { 
+        ...state, 
+        courses: payload
+      };
     }
     default:
       return state;

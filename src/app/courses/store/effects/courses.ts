@@ -1,9 +1,13 @@
-import {Injectable} from "@angular/core";
-import {Actions, Effect, ofType} from "@ngrx/effects";
-import {Router} from "@angular/router";
-import {ECoursesActions} from "../actions/courses";
-import {map, switchMap} from "rxjs/operators";
-import {CourseService} from "../../service/course/course.service";
+import { Injectable } from "@angular/core";
+import { Actions, Effect, ofType } from "@ngrx/effects";
+import { Store } from '@ngrx/store';
+import { Router } from "@angular/router";
+import { ECoursesActions, GetCoursesSuccess } from "../actions/courses";
+import { map, switchMap, mergeMap } from "rxjs/operators";
+import { CourseService } from "../../service/course/course.service";
+
+ 
+import { Observable } from 'rxjs';
 
 
 @Injectable()
@@ -17,14 +21,16 @@ export class CoursesEffects {
   }
 
   @Effect()
-  getAll$ = this.actions$.pipe(
-    ofType(ECoursesActions.GET_COURSES),
-    map( () => console.log("effect")),
-    switchMap(() =>
-      this.courseService.getCourses()
+  getAll$: Observable<any> = this.actions$
+    .pipe(
+      ofType(ECoursesActions.GET_COURSES),
+      mergeMap(() => this.courseService.getCourses()
+        .pipe(
+          map(data => new GetCoursesSuccess(data)),
+          // catchError(() => new GetCoursesFail())
+        )
+
+      )
     )
-
-  )
-
 
 }
