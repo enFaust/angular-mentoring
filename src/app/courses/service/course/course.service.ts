@@ -10,7 +10,7 @@ export class CourseService implements OnDestroy {
 
   start: number = 0;
   count: number = 0;
-  textFragment: string;
+  textFragment: string = "";
   courses: Course[] = [];
 
   private readonly HOST = 'http://localhost:3004';

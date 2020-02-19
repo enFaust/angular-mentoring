@@ -11,9 +11,9 @@ import {WrapperPage} from './pages/wrapper-page/wrapper.page';
 import {RouterModule} from "@angular/router";
 import {ChangePlateBorderDirective} from './derictives/change-plate-border.directive';
 import {LoginPage} from './pages/login-page/login.page';
-import {BreadcrumbModule} from "primeng";
-import {HttpClient, HttpClientModule} from "@angular/common/http";
+import {HttpClientModule} from "@angular/common/http";
 import {ReactiveFormsModule} from "@angular/forms";
+import { SpinnerComponent } from './components/spinner/spinner.component';
 
 
 @NgModule({
@@ -28,7 +28,8 @@ import {ReactiveFormsModule} from "@angular/forms";
     WrapperPage,
     ChangePlateBorderDirective,
     WrapperPage,
-    LoginPage
+    LoginPage,
+    SpinnerComponent,
   ],
   exports: [
     FooterComponent,
@@ -36,11 +37,11 @@ import {ReactiveFormsModule} from "@angular/forms";
     BreadcrumbsComponent,
     WrapperPage,
     ChangePlateBorderDirective,
+    SpinnerComponent,
   ],
   imports: [
     CommonModule,
     RouterModule,
-    BreadcrumbModule,
     HttpClientModule,
     ReactiveFormsModule
   ],

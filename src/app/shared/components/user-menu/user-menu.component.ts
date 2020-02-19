@@ -16,7 +16,6 @@ export class UserMenuComponent  {
 
   constructor(private authService: AuthService) {
     this.authService.getCurrentUser().subscribe(data => {
-      console.log(data);
       this.user = data;
     });
   }
