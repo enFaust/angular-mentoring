@@ -30,7 +30,7 @@ export class GetCourses implements Action {
 export class GetCoursesSuccess implements Action {
   readonly type = ECoursesActions.GET_COURSES_SUCCESS;
 
-  constructor(public payload?: any) {}
+  constructor(public payload?: Course[]) {}
 }
 
 export class GetCourseSuccess implements Action {
@@ -78,15 +78,14 @@ export class AddCourseFail implements Action {
 
 export class RemoveCourse implements Action {
   readonly type = ECoursesActions.REMOVE_COURSE;
-
-  constructor(public payload: Course) {
+  constructor(public payload: number) {
   }
 }
 
 export class RemoveCourseSuccess implements Action {
   readonly type = ECoursesActions.REMOVE_COURSE_SUCCESS;
 
-  constructor(public payload: Course) {
+  constructor(public payload: Course[]) {
   }
 }
 

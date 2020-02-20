@@ -35,17 +35,13 @@ export function courseReducer( state = initialCourseState, action: CourseActions
     case ECoursesActions.ADD_COURSE: {
 
     }
-    case ECoursesActions.REMOVE_COURSE: {
-      const course = action.payload;
+    case ECoursesActions.REMOVE_COURSE_SUCCESS: {
+      return payload;
     }
     case ECoursesActions.GET_COURSES: {
     }
     case ECoursesActions.GET_COURSES_SUCCESS: {
-      console.warn(payload)
-      return { 
-        ...state, 
-        courses: payload
-      };
+      return payload
     }
     default:
       return state;

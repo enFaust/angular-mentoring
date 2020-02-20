@@ -7,7 +7,7 @@ import {debounce, debounceTime} from "rxjs/operators";
 import {Store} from "@ngrx/store";
 import {AppState} from "../../../store/state/app.state";
 import {ICourseState} from "../../store/states/courses/courses";
-import {ECoursesActions, GetCourses} from "../../store/actions/courses";
+import {ECoursesActions, GetCourses, RemoveCourse} from "../../store/actions/courses";
 import { getCourses } from '../../store/reducers/courses';
 
 @Component({
@@ -36,17 +36,21 @@ export class CoursesComponent implements OnInit, OnDestroy {
 
     this.store.dispatch(new GetCourses());
 
-
     this.courses$ = this.store.select(getCourses).subscribe(data => {
-      this.courses = data.courses;
+      this.courses = data;
+      this.routerChanged = false;
     });
   }
 
   public onDelete(id: number): void {
     this.routerChanged = true;
     if (confirm('Do you really want to delete this course?')) {
-      this.coursesService.removeCourse(id).subscribe(observable => this.routerChanged = false
-      );
+
+      this.store.dispatch(new RemoveCourse(id));
+      this.courses$ = this.store.select(getCourses).subscribe(data => {
+        this.courses = data;
+        this.routerChanged = false;
+      });
     }
   }
 
