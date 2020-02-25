@@ -1,14 +1,12 @@
-import {Component, OnChanges, OnInit, SimpleChanges, OnDestroy} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {CourseService} from '../../service/course/course.service';
 import {Course} from '../../model/course/course';
 import {Title} from "@angular/platform-browser";
-import {interval, observable, Observable, Subject, Subscription} from "rxjs";
-import {debounce, debounceTime} from "rxjs/operators";
+import {Subscription} from "rxjs";
 import {Store} from "@ngrx/store";
-import {AppState} from "../../../store/state/app.state";
 import {ICourseState} from "../../store/states/courses/courses";
-import {ECoursesActions, GetCourses, RemoveCourse} from "../../store/actions/courses";
-import { getCourses } from '../../store/reducers/courses';
+import {SearchCourses, LoadMoreCourse, RemoveCourse, GetCourses} from "../../store/actions/courses";
+import {getCourses} from "../../store/reducers/courses";
 
 @Component({
   selector: 'app-courses',
@@ -25,6 +23,7 @@ export class CoursesComponent implements OnInit, OnDestroy {
 
   courses: Course[] = [];
   courses$: Subscription;
+
   routerChanged = false;
 
   constructor(private coursesService: CourseService, private titleService: Title, private store: Store<ICourseState>) {
@@ -33,6 +32,7 @@ export class CoursesComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.routerChanged = true;
     this.titleService.setTitle(CoursesComponent.TITLE);
+
 
     this.store.dispatch(new GetCourses());
 
@@ -45,8 +45,8 @@ export class CoursesComponent implements OnInit, OnDestroy {
   public onDelete(id: number): void {
     this.routerChanged = true;
     if (confirm('Do you really want to delete this course?')) {
-
       this.store.dispatch(new RemoveCourse(id));
+
       this.courses$ = this.store.select(getCourses).subscribe(data => {
         this.courses = data;
         this.routerChanged = false;
@@ -56,21 +56,23 @@ export class CoursesComponent implements OnInit, OnDestroy {
 
   public loadMore() {
     this.routerChanged = true;
-    this.coursesService.loadMore()
-      .subscribe(courses => {
-        // this.coursesSubject.next(courses);
-        this.routerChanged = false;
-      });
+    this.store.dispatch(new LoadMoreCourse());
+
+    this.courses$ = this.store.select(getCourses).subscribe(data => {
+      this.courses = data;
+      this.routerChanged = false;
+    });
   }
 
   public search(textSearch: string): void {
     this.routerChanged = true;
-    this.coursesService.searchCourses(textSearch)
-      .subscribe(
-        courses => {
-          // this.coursesSubject.next(courses);
-          this.routerChanged = false;
-        });
+    console.log("Search")
+    this.store.dispatch(new SearchCourses(textSearch));
+
+    this.courses$ = this.store.select(getCourses).subscribe(data => {
+      this.courses = data;
+      this.routerChanged = false;
+    });
   }
 
   ngOnDestroy() {
@@ -78,9 +80,5 @@ export class CoursesComponent implements OnInit, OnDestroy {
       this.courses$.unsubscribe();
     }
   }
-
-  // public updatePage() {
-  //   this.store.dispatch(new GetCourses());
-  // }
 
 }

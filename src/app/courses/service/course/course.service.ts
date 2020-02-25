@@ -24,7 +24,6 @@ export class CourseService implements OnDestroy {
     return this.httpClient.post<Course>(this.HOST + '/courses', course);
   }
 
-
   public getCourses(): Observable<Course[]> {
     return this.httpClient.get<Course[]>(this.HOST + "/courses?start=" + this.start + "&count=" + this.count)
   }

@@ -44,7 +44,7 @@ const routes: Routes = [
         },
       },
       {
-        path: ':id',
+        path: ':courses',
         component: CoursePageComponent,
         data: {
           breadcrumb: 'Edit',
@@ -62,7 +62,7 @@ const routes: Routes = [
      },
    },
    {
-     path: 'courses/:id',
+     path: 'courses/:courses',
      component: CoursePageComponent,
      data: {
        breadcrumb: 'Edit',

@@ -9,16 +9,26 @@ export const authReducers = (
   action: AuthActions
 ): IAuthState => {
   switch (action.type) {
+    case EAuthActions.LOGIN:
+      break;
     case EAuthActions.LOGIN_SUCCESS: {
-      return {
-        token: action.payload
-      }
+
+      return;
     }
+    case EAuthActions.LOGIN_ERROR:
+      console.log("ERROR LOG")
+      return;
+    case EAuthActions.LOGOUT:
+      return;
     case EAuthActions.LOGOUT_SUCCESS: {
-      return {
-        token: null
-      }
+      return;
     }
+    case EAuthActions.CURRENT_USER_DATA:
+      return;
+    case EAuthActions.CURRENT_USER_DATA_SUCCESS:
+      return;
+    case EAuthActions.CURRENT_USER_DATA_ERROR:
+      return;
     default: {
       return state
     }
@@ -26,7 +36,7 @@ export const authReducers = (
 };
 
 
-export const getUserReducers = (
+/*export const getUserReducers = (
   state = initialCurrentUserState,
   action: AuthActions
 ): ICurrentUserState => {
@@ -40,5 +50,5 @@ export const getUserReducers = (
       return state;
     }
   }
-}
+}*/
 

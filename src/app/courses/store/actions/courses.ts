@@ -4,16 +4,15 @@ import {Course} from "../../model/course/course";
 export const enum ECoursesActions {
   ADD_COURSE = '[Course component] Add Course',
   ADD_COURSE_SUCCESS = '[Course component] Add Course sSuccess',
-  ADD_COURSE_FAIL = '[Course component] Add Course Fail',
   GET_COURSES = '[Course component] Get Courses',
   GET_COURSES_SUCCESS = '[Course component] Get Courses Success',
-  GET_COURSE_SUCCESS = '[Course component] Get Course sSuccess',
-  GET_COURSE_FAIL = '[Course component] Get Course Fail',
   REMOVE_COURSE = '[Course component] Remove Course',
   REMOVE_COURSE_SUCCESS = '[Course component] Remove Course Success',
-  REMOVE_COURSE_FAIL = '[Course component] Remove Course Fail'
+  LOAD_MORE_COURSE = '[Course component] Load More Courses',
+  LOAD_MORE_COURSE_SUCCESS = '[Course component] Load More Courses Success',
+  SEARCH_COURSES = '[Course component] Search Courses',
+  SEARCH_COURSES_SUCCESS = '[Course component] Search Courses Success',
 }
-
 
 /**
  * Get Course CourseActions
@@ -22,28 +21,28 @@ export const enum ECoursesActions {
 export class GetCourses implements Action {
   readonly type = ECoursesActions.GET_COURSES;
 
-  constructor(public payload: any = null) {
+  constructor(public payload?: any) {
   }
 }
-
 
 export class GetCoursesSuccess implements Action {
   readonly type = ECoursesActions.GET_COURSES_SUCCESS;
 
-  constructor(public payload?: Course[]) {}
-}
-
-export class GetCourseSuccess implements Action {
-  readonly type = ECoursesActions.GET_COURSE_SUCCESS;
-
-  constructor(public payload: Course) {
+  constructor(public payload: Course[]) {
   }
 }
 
-export class GetCourseFail implements Action {
-  readonly type = ECoursesActions.GET_COURSE_FAIL;
+export class SearchCourses implements Action {
+  readonly type = ECoursesActions.SEARCH_COURSES;
 
-  constructor(public payload: Course) {
+  constructor(public payload?: any) {
+  }
+}
+
+export class SearchCoursesSuccess implements Action {
+  readonly type = ECoursesActions.SEARCH_COURSES_SUCCESS;
+
+  constructor(public payload: Course[]) {
   }
 }
 
@@ -65,13 +64,6 @@ export class AddCourseSuccess implements Action {
   }
 }
 
-export class AddCourseFail implements Action {
-  readonly type = ECoursesActions.ADD_COURSE_FAIL;
-
-  constructor(public payload: Course) {
-  }
-}
-
 /**
  * Remove Course CourseActions
  */
@@ -84,26 +76,31 @@ export class RemoveCourse implements Action {
 
 export class RemoveCourseSuccess implements Action {
   readonly type = ECoursesActions.REMOVE_COURSE_SUCCESS;
-
-  constructor(public payload: Course[]) {
+  constructor(public payload: number) {
   }
 }
 
-export class RemoveCourseFail implements Action {
-  readonly type = ECoursesActions.REMOVE_COURSE_FAIL;
+export class LoadMoreCourse implements Action {
+  readonly type = ECoursesActions.LOAD_MORE_COURSE;
+  constructor(public payload: any = null) {
+  }
+}
 
-  constructor(public payload: Course) {
+export class LoadMoreCourseSuccess implements Action {
+  readonly type = ECoursesActions.LOAD_MORE_COURSE_SUCCESS;
+  constructor(public payload?: Course[]) {
   }
 }
 
 export type CourseActions =
   | AddCourse
   | AddCourseSuccess
-  | AddCourseFail
   | RemoveCourse
   | RemoveCourseSuccess
-  | RemoveCourseFail
+  | SearchCourses
+  | SearchCoursesSuccess
+  | LoadMoreCourse
+  | LoadMoreCourseSuccess
   | GetCourses
   | GetCoursesSuccess
-  | GetCourseSuccess
-  | GetCourseFail;
+  ;
