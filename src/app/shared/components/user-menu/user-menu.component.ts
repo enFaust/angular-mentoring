@@ -15,9 +15,9 @@ export class UserMenuComponent  {
   public logOut: EventEmitter<string> = new EventEmitter<string>();
 
   constructor(private authService: AuthService) {
-    this.authService.getCurrentUser().subscribe(data => {
+   /* this.authService.getCurrentUser().subscribe(data => {
       this.user = data;
-    });
+    });*/
   }
 
   public isAuth(): boolean {

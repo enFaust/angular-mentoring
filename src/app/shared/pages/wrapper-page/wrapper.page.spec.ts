@@ -5,7 +5,7 @@ import {BreadcrumbsComponent} from '../../components/breadcrumbs/breadcrumbs.com
 import {HeaderComponent} from '../../components/header/header.component';
 import {FooterComponent} from '../../components/footer/footer.component';
 import {AppRoutingModule} from "../../../app-routing.module";
-import {CoursesComponent} from "../../../courses/pages/courses/courses.component";
+import {CoursesPage} from "../../../courses/pages/courses/courses.page";
 import {NotFoundComponent} from "../not-found/not-found.component";
 import {LogoComponent} from "../../components/logo/logo.component";
 import {UserMenuComponent} from "../../components/user-menu/user-menu.component";
@@ -28,7 +28,7 @@ describe('WrapperPage', () => {
         BreadcrumbsComponent,
         HeaderComponent,
         FooterComponent,
-        CoursesComponent,
+        CoursesPage,
         NotFoundComponent,
         LogoComponent,
         UserMenuComponent,

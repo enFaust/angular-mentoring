@@ -36,7 +36,7 @@ export class CourseService implements OnDestroy {
       "&textFragment=" + textFragment);
   }
 
-  public getCourseById(id: number):  Observable<Course> {
+  public getCourseById(id: number): Observable<Course> {
     return this.httpClient.get<Course>(this.HOST + "/courses/" + id);
   }
 
@@ -52,14 +52,8 @@ export class CourseService implements OnDestroy {
       "&textFragment=" + this.textFragment);
   }
 
-  public updateCourse(course: Course): boolean {
-    for (let i = 0; i < this.courses.length; i++) {
-      if (this.courses[i].id == course.id) {
-        this.courses[i] = course;
-        return true;
-      }
-    }
-    return false;
+  public updateCourse(course: Course): Observable<Course> {
+    return this.httpClient.patch<Course>(this.HOST + '/courses/' + course.id, course);
   }
 
   ngOnDestroy(): void {

@@ -7,25 +7,23 @@ export function courseReducer(state = initialCourseState, action: CourseActions)
 
   switch (type) {
     case ECoursesActions.ADD_COURSE:
-      break;
-    case ECoursesActions.ADD_COURSE_SUCCESS:
-      break;
+      return;
+    case ECoursesActions.UPDATE_COURSE:
+      return;
     case ECoursesActions.REMOVE_COURSE:
-      break;
-    case ECoursesActions.REMOVE_COURSE_SUCCESS:
-      break;
+      return;
     case ECoursesActions.GET_COURSES:
-      break;
+      return;
     case ECoursesActions.GET_COURSES_SUCCESS: {
       return payload
     }
     case ECoursesActions.SEARCH_COURSES:
-      break;
+      return;
     case ECoursesActions.SEARCH_COURSES_SUCCESS: {
       return payload
     }
     case ECoursesActions.LOAD_MORE_COURSE:
-      break;
+      return;
     case ECoursesActions.LOAD_MORE_COURSE_SUCCESS: {
       return payload
     }

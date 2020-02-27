@@ -41,11 +41,36 @@ export class CoursesEffects {
       ofType<RemoveCourse>(ECoursesActions.REMOVE_COURSE),
       switchMap(action =>
         this.courseService.removeCourse(action.payload)
-          .pipe(
-            map(() => {
+          .pipe(map(() => {
               return new GetCourses();
             })
           )
+      )
+    );
+
+  @Effect()
+  add$: Observable<any> = this.actions$
+    .pipe(
+      ofType<SearchCourses>(ECoursesActions.ADD_COURSE),
+      switchMap(action =>
+        this.courseService.createCourse(action.payload)
+          .pipe(map(() => {
+              return new GetCourses();
+            })
+          )
+      )
+    );
+
+  @Effect()
+  update$: Observable<any> = this.actions$
+    .pipe(
+      ofType<SearchCourses>(ECoursesActions.UPDATE_COURSE),
+      switchMap(action =>
+        this.courseService.updateCourse(action.payload).pipe(
+          map(() => {
+            return new GetCourses();
+          })
+        )
       )
     );
 
@@ -72,4 +97,6 @@ export class CoursesEffects {
         )
       )
     );
+
+
 }

@@ -8,13 +8,12 @@ import {ICourseState, initialCourseState} from "../../courses/store/states/cours
 
 export interface AppState {
   currentUser: ICurrentUserState,
-  token: IAuthState,
   courses: ICourseState
 }
 
 export const initialAppState: AppState = {
   currentUser: initialCurrentUserState,
-  token: initialAuthState,
+  //token: initialAuthState,
   courses: initialCourseState,
 };
 
