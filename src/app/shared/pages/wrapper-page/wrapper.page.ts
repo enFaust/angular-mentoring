@@ -1,5 +1,6 @@
 import {Component, CUSTOM_ELEMENTS_SCHEMA, NgModule} from '@angular/core';
 import {NavigationEnd, NavigationStart, Router} from "@angular/router";
+import {SpinnerService} from "../../service/spinner/spinner.service";
 
 @Component({
   selector: 'app-wrapper-page',
@@ -8,18 +9,17 @@ import {NavigationEnd, NavigationStart, Router} from "@angular/router";
 })
 export class WrapperPage {
 
-  routerChanged = false;
+  spinnerState;
 
-  constructor(private router: Router) {
+  constructor(private router: Router, private spinnerService: SpinnerService) {
     router.events.subscribe(event => {
       if (event instanceof NavigationStart) {
-        this.routerChanged = true;
+        this.spinnerState =true;
       }
 
       if (event instanceof NavigationEnd) {
-        this.routerChanged = false;
+        spinnerService.turnOff();
       }
     });
   }
-
 }

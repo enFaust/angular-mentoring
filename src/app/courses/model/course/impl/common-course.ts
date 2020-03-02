@@ -19,7 +19,7 @@ export class CommonCourse implements Course {
   }
 
   toString(): string {
-    return 'id: ' + this.id +
+    return 'courses: ' + this.id +
       ', name: ' + this.name +
       ', date: ' + this.date +
       ', length: ' + this.length +

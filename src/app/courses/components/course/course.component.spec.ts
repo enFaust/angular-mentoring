@@ -43,8 +43,8 @@ describe('CourseComponent', () => {
     expect(deleteButton).toBe(component.course.id);
   });
 
-  it('course id expect', () => {
-    const cartTitle = fixture.debugElement.query(By.css('.id')).nativeElement;
+  it('course courses expect', () => {
+    const cartTitle = fixture.debugElement.query(By.css('.courses')).nativeElement;
     expect(cartTitle.textContent).toContain('1');
   });
 

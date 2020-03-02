@@ -1,10 +1,10 @@
 import {CUSTOM_ELEMENTS_SCHEMA, NgModule} from '@angular/core';
 import {Routes, RouterModule} from '@angular/router';
 import {NotFoundComponent} from './shared/pages/not-found/not-found.component';
-import {CoursesComponent} from './courses/pages/courses/courses.component';
+import {CoursesPage} from './courses/pages/courses/courses.page';
 import {LoginPage} from "./shared/pages/login-page/login.page";
-import {AddCoursePage} from "./courses/pages/add-course/add-course-page";
-import {CoursePageComponent} from "./courses/pages/course-page/course-page.component";
+import {AddCoursePage} from "./courses/pages/add-course-page/add-course.page";
+import {CoursePage} from "./courses/pages/edit-course-page/course.page";
 import {AuthGuard} from "./auth.guard";
 
 
@@ -29,7 +29,7 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        component: CoursesComponent,
+        component: CoursesPage,
         data: {
           breadcrumb: 'All Courses',
           title: 'Courses'
@@ -45,7 +45,7 @@ const routes: Routes = [
       },
       {
         path: ':id',
-        component: CoursePageComponent,
+        component: CoursePage,
         data: {
           breadcrumb: 'Edit',
           title: 'Edit Course'
@@ -53,22 +53,6 @@ const routes: Routes = [
       },
     ]
   },
-  /* {
-     path: 'courses/add',
-     component: AddCoursePage,
-     data: {
-       breadcrumb: 'Add',
-       name: 'Add course'
-     },
-   },
-   {
-     path: 'courses/:id',
-     component: CoursePageComponent,
-     data: {
-       breadcrumb: 'Edit',
-       name: 'Edit Course'
-     }
-   },*/
   {
     path: 'courses/**',
     component: NotFoundComponent,

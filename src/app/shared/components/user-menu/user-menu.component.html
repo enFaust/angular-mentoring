@@ -1,8 +1,8 @@
-<div *ngIf="!isAuth()">
+<div *ngIf="!user">
   <button class="btn btn-outline-light my-2 my-sm-0" routerLink="/login">Login</button>
 </div>
 
-<div *ngIf="isAuth()">
-  <span *ngIf="user != null" class="text-capitalize text-light">{{user.name.first}} {{user.name.last}}</span>
+<div *ngIf="user && user.name" >
+  <span class="text-capitalize text-light">{{user.name.first}} {{user.name.last}}</span>
   <button class="btn btn-outline-light my-2 my-sm-0" (click)="logout()" >Log out</button>
 </div>

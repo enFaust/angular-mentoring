@@ -3,6 +3,10 @@ import {AuthService} from "../../service/auth/auth.service";
 import {Title} from "@angular/platform-browser";
 import {Router} from "@angular/router";
 import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {Store} from "@ngrx/store";
+import {AppState} from "../../../store/state/app.state";
+import {Login} from "../../store/actions/auth";
+import {Subscription} from "rxjs";
 
 @Component({
   selector: 'app-login',
@@ -30,7 +34,7 @@ export class LoginPage implements OnInit {
     ])
   });
 
-  constructor(private authService: AuthService, private titleService: Title, public router: Router) {
+  constructor(private authService: AuthService, private titleService: Title, public router: Router, private store: Store<AppState>) {
   }
 
   ngOnInit(): void {
@@ -43,16 +47,12 @@ export class LoginPage implements OnInit {
       const login = this.loginForm.controls['login'].value;
       const password = this.loginForm.controls['password'].value;
 
-      this.authService.login(login, password).subscribe(resp => {
-        if (resp) {
-          this.routerChanged = false;
-          this.router.navigate(['/courses']);
-        }
-      }, (error => {
-        console.log(error['error']);
-        this.loginErrorBlock = true;
-        this.routerChanged = false;
-      }));
+      const payload = {
+        login: login,
+        password: password
+      };
+      this.store.dispatch(new Login(payload));
+      this.router.navigate(['/courses'])
     } else {
       this.showErrorBlock = true;
       this.routerChanged = false;

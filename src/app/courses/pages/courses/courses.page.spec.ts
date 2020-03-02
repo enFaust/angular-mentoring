@@ -1,6 +1,6 @@
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import {CoursesComponent} from './courses.component';
+import {CoursesPage} from './courses.page';
 import {CoursesSearchComponent} from '../../components/courses-search/courses-search.component';
 import {CourseComponent} from '../../components/course/course.component';
 import {OrderByPipe} from "../../../shared/pipes/order-by/order-by.pipe";
@@ -8,13 +8,13 @@ import {DurationConverterPipe} from "../../../shared/pipes/duration/duration-con
 import {ChangePlateBorderDirective} from "../../../shared/derictives/change-plate-border.directive";
 
 describe('CoursesComponent', () => {
-  let component: CoursesComponent;
-  let fixture: ComponentFixture<CoursesComponent>;
+  let component: CoursesPage;
+  let fixture: ComponentFixture<CoursesPage>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [
-        CoursesComponent,
+        CoursesPage,
         CoursesSearchComponent,
         CourseComponent,
         OrderByPipe,
@@ -26,7 +26,7 @@ describe('CoursesComponent', () => {
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(CoursesComponent);
+    fixture = TestBed.createComponent(CoursesPage);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
