@@ -25,8 +25,8 @@ export class UserMenuComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.spinnerService.turnOn();
     this.store.dispatch(new CurrentUserData(this.authService.getToken()));
+    this.spinnerService.turnOn();
 
     this.user$ = this.store.select(getCurrentUserState).subscribe(data => {
       this.user = data;

@@ -16,7 +16,7 @@ import {SpinnerService} from "../../../shared/service/spinner/spinner.service";
 })
 export class CoursesPage implements OnInit, OnDestroy {
 
-  public static TITLE: string = "Add new course";
+  public static TITLE: string = "Get All courses";
 
   courses: Course[] = [];
   courses$: Subscription;
