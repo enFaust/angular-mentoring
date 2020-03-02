@@ -1,7 +1,7 @@
 import {Course} from "../../../model/course/course";
 
 export interface ICourseState {
-  courses: Course[] ;
+  courses: Course[];
 }
 
 export const initialCourseState: ICourseState = {

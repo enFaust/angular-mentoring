@@ -37,7 +37,7 @@ import { SpinnerComponent } from './components/spinner/spinner.component';
     BreadcrumbsComponent,
     WrapperPage,
     ChangePlateBorderDirective,
-    SpinnerComponent,
+    SpinnerComponent
   ],
   imports: [
     CommonModule,

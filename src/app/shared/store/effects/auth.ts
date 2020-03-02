@@ -1,10 +1,15 @@
 import {Injectable} from "@angular/core";
 import {Actions, Effect, ofType} from "@ngrx/effects";
 import {AuthService} from "../../service/auth/auth.service";
-import {CurrentUserData, EAuthActions, Login, LoginError, LoginSuccess} from '../actions/auth'
+import {
+  EAuthActions,
+  Login,
+  LoginError,
+  LoginSuccess
+} from '../actions/auth'
 import {catchError, map, switchMap} from "rxjs/operators";
 import {Router} from "@angular/router";
-import {error} from "util";
+import {of} from "rxjs";
 
 @Injectable()
 export class AuthEffects {
@@ -16,19 +21,16 @@ export class AuthEffects {
   ) {
   }
 
-  /*@Effect()
+  @Effect()
   logIn$ = this.actions$.pipe(
     ofType<Login>(EAuthActions.LOGIN),
     switchMap(action =>
-      this.authService.login(action.payload["login"], action.payload["password"]).pipe(
-        map(() => new LoginSuccess())
-      ),catchError( err => new LoginError(err))
-    ));
-
-  @Effect()
-  currentUserData$ = this.actions$.pipe(
-    ofType<CurrentUserData>(EAuthActions.CURRENT_USER_DATA),
-
-  );*/
+      this.authService.login(action.payload.login, action.payload.password).pipe(
+        map(token => {
+          localStorage.setItem('token', token);
+          return new LoginSuccess({token: token});
+        }),
+        catchError(err => of(new LoginError({error: err})))
+      )));
 
 }

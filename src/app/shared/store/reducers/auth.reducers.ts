@@ -1,33 +1,29 @@
-import {IAuthState, initialAuthState} from "../states/user/auth";
+import {initialToken, IToken} from "../states/auth";
 import {AuthActions, EAuthActions} from "../actions/auth";
 
 
-export const authReducers = (
-  state = initialAuthState,
-  action: AuthActions
-): IAuthState => {
+export const tokenReducers = (state = initialToken, action: AuthActions ): IToken => {
+  const {type, payload} = action;
+
   switch (action.type) {
     case EAuthActions.LOGIN:
-      break;
+      return state;
     case EAuthActions.LOGIN_SUCCESS: {
-      return;
+      return payload;
     }
     case EAuthActions.LOGIN_ERROR:
-      return;
+      return ;
     case EAuthActions.LOGOUT:
-      return;
+      return ;
     case EAuthActions.LOGOUT_SUCCESS: {
-      return;
+      return ;
     }
-    case EAuthActions.CURRENT_USER_DATA:
-      return;
-    case EAuthActions.CURRENT_USER_DATA_SUCCESS:
-      return;
-    case EAuthActions.CURRENT_USER_DATA_ERROR:
-      return;
     default: {
       return state
     }
   }
-};
+}
+
+
+
 

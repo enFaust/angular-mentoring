@@ -11,6 +11,10 @@ import {EffectsModule} from "@ngrx/effects";
 import {AuthEffects} from "./shared/store/effects/auth";
 import {courseReducer} from "./courses/store/reducers/courses";
 import {CoursesEffects} from "./courses/store/effects/courses";
+import {StoreDevtoolsModule} from "@ngrx/store-devtools";
+import {environment} from "../environments/environment";
+import {tokenReducers} from "./shared/store/reducers/auth.reducers";
+import {userReducers} from "./shared/store/reducers/user.reducer";
 
 @NgModule({
   declarations: [
@@ -21,8 +25,12 @@ import {CoursesEffects} from "./courses/store/effects/courses";
     AppRoutingModule,
     CoursesModule,
     SharedModule,
+    StoreModule.forRoot({courses: courseReducer, token: tokenReducers, user: userReducers}),
     EffectsModule.forRoot([AuthEffects, CoursesEffects]),
-    StoreModule.forRoot({courses: courseReducer}),
+    StoreDevtoolsModule.instrument({
+      maxAge: 25,
+      logOnly: environment.production,
+    }),
   ],
   providers: [AuthGuard],
   bootstrap: [AppComponent],

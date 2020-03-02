@@ -53,22 +53,6 @@ const routes: Routes = [
       },
     ]
   },
-  /* {
-     path: 'courses/add',
-     component: AddCoursePage,
-     data: {
-       breadcrumb: 'Add',
-       name: 'Add course'
-     },
-   },
-   {
-     path: 'courses/:courses',
-     component: CoursePage,
-     data: {
-       breadcrumb: 'Edit',
-       name: 'Edit Course'
-     }
-   },*/
   {
     path: 'courses/**',
     component: NotFoundComponent,

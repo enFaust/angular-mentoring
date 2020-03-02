@@ -52,6 +52,7 @@ export class LoginPage implements OnInit {
         password: password
       };
       this.store.dispatch(new Login(payload));
+      this.router.navigate(['/courses'])
     } else {
       this.showErrorBlock = true;
       this.routerChanged = false;
