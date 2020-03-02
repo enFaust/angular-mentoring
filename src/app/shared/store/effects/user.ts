@@ -21,7 +21,7 @@ export class UserEffects {
     ofType<CurrentUserData>(EUserActions.CURRENT_USER_DATA),
     switchMap((token) => this.authService.getCurrentUser(token.payload).pipe(
       map(user => {
-        new CurrentUserDataSuccess(user)
+        return new CurrentUserDataSuccess(user)
       }),
       catchError(err => of(new CurrentUserDataError(err)))
     )));

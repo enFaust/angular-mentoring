@@ -2,7 +2,7 @@
   <button class="btn btn-outline-light my-2 my-sm-0" routerLink="/login">Login</button>
 </div>
 
-<div *ngIf="user">
-  <span class="text-capitalize text-light">{{user.name['first']}} {{user.name['last']}}</span>
+<div *ngIf="user && user.name" >
+  <span class="text-capitalize text-light">{{user.name.first}} {{user.name.last}}</span>
   <button class="btn btn-outline-light my-2 my-sm-0" (click)="logout()" >Log out</button>
 </div>

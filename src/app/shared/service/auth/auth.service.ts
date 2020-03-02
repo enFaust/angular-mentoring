@@ -40,13 +40,6 @@ export class AuthService implements OnDestroy {
       });
   }
 
-  public getUserData(): Observable<IUser> {
-
-    this.userStore.dispatch(new CurrentUserData(this.getToken()));
-
-    return this.userStore.select(getCurrentUserState);
-  }
-
   public getToken(): string{
     return localStorage.getItem('token');
   }
