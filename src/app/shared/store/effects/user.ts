@@ -7,7 +7,7 @@ import {CurrentUserData, CurrentUserDataError, CurrentUserDataSuccess, EUserActi
 import {catchError, map, switchMap} from "rxjs/operators";
 
 @Injectable()
-export class AuthEffects {
+export class UserEffects {
 
   constructor(
     private actions$: Actions,

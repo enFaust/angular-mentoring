@@ -1,4 +1,3 @@
-import {IName} from "../../model/user/IName";
 import {IUser} from "../../model/user/IUser";
 
 export interface ICurrentUserState {

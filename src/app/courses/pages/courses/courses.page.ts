@@ -28,7 +28,6 @@ export class CoursesPage implements OnInit, OnDestroy {
     this.spinnerService.turnOn();
     this.titleService.setTitle(CoursesPage.TITLE);
 
-
     this.store.dispatch(new GetCourses());
 
     this.courses$ = this.store.select(getCourses).subscribe(data => {

@@ -12,7 +12,6 @@ import {Subscription} from "rxjs";
 export class UserMenuComponent implements OnInit {
 
   user: IUser;
-  user$: Subscription;
 
   @Output()
   public logOut: EventEmitter<string> = new EventEmitter<string>();
@@ -27,7 +26,10 @@ export class UserMenuComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.authService.getUserData().subscribe(data => this.user = data);
+    this.authService.getUserData().subscribe(data => {
+      console.log(data)
+      this.user = data
+    });
   }
 
 }
